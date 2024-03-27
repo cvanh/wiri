@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Auth;
+namespace Tests\Feature\Producers;
 
 use App\Models\Producer;
 use App\Models\User;
@@ -21,17 +21,32 @@ class ProducerTest extends TestCase
         Producer::factory()->count(4)->create();
 
         $response = $this->actingAs($user)->get('/producer');
-        var_dump($response->getContent());
 
         // where there errors?
         $response->assertStatus(200);
-
+        
+        // we just created 4 producers so we are expecting 4 producers
         $response->assertJsonCount(4);
+    }
 
-        // check if we got the same result we have put in the db
-        // $response->assertJson(
-        //     fn (AssertableJson $json) =>
-        //     $json->where("name", "wietje")->etc()
-        // );
+    public function test_show_producer(): void
+    {
+        $user = User::factory()->create();
+        Producer::factory()->create([
+            "id" => "19E1612B7-48D6-4A0F-A0E6-A133FC88AC4023"
+        ]);
+
+        $response = $this->actingAs($user)->getJson("/producer/19E1612B7-48D6-4A0F-A0E6-A133FC88AC4023");
+
+        // where there errors
+        $response->assertStatus(200);
+
+        // check if we got an object of the producer which we requested
+        $response->assertJson(
+            fn (AssertableJson $json) =>
+            $json
+                ->where("id", "19E1612B7-48D6-4A0F-A0E6-A133FC88AC4023")
+                ->etc()
+        );
     }
 }

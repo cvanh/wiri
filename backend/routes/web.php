@@ -9,5 +9,7 @@ Route::get('/', function () {
 
 // TODO add auth
 Route::get("/producer", [ProducerController::class, "index"]);
+Route::get("/producer/{id}", [ProducerController::class, "show"]);
+
 
 require __DIR__ . '/auth.php';

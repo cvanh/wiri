@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Producer;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -9,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class ProducerFactory extends Factory
 {
+    protected $model = Producer::class;
     /**
      * Define the model's default state.
      *

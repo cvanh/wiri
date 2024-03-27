@@ -28,7 +28,7 @@ class ProducerController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return Producer::findOrFail($id);
     }
 
     /**
