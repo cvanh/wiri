@@ -12,6 +12,27 @@ class ProducerTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_create_new_producer_authenticated(): void
+    {
+        $user = User::factory()->create();
+
+        $data = [
+            "name" => "wietje",
+            "type" => "store",
+            "about" => "about"
+        ];
+
+        $response = $this->actingAs($user)->postJson('/producer', $data);
+
+        // where there errors?
+        $response->assertStatus(200);
+
+        // check if it got inserted
+        $this->assertDatabaseHas(config("constants.TABLE.PRODUCER_TABLE"), [
+            "name" => "wietje"
+        ]);
+    }
+
     public function test_producers_are_listed_authenticated(): void
     {
         $user = User::factory()->create();
