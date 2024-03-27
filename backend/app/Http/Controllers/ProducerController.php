@@ -12,7 +12,7 @@ class ProducerController extends Controller
      */
     public function index()
     {
-        return Producer:all();
+        return Producer::all();
     }
 
     /**

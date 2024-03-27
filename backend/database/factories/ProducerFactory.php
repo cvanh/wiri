@@ -17,7 +17,8 @@ class ProducerFactory extends Factory
     public function definition(): array
     {
         return [
-            'type' => fake()->randomElement(["store", "grower"]),
+            'id' => fake()->uuid(),
+            'type' => fake()->randomElement(["producer", "store"]),
             'name' => fake()->name(),
             'about' => fake()->paragraph()
         ];

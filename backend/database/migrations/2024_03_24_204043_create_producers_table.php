@@ -16,6 +16,8 @@ return new class extends Migration
             $table->enum("type", ["store", "producer"]);
             $table->string("name");
             $table->string("about");
+            $table->timestamp("updated_at");
+            $table->timestamp("created_at");
         });
     }
     /**

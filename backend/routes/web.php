@@ -7,6 +7,7 @@ Route::get('/', function () {
     return ['Laravel' => app()->version()];
 });
 
-Route::get("/producer", ProducerController::class)->middleware("auth");
+// TODO add auth
+Route::get("/producer", [ProducerController::class, "index"]);
 
 require __DIR__ . '/auth.php';
