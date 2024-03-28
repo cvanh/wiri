@@ -20,7 +20,15 @@ class ProducerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            "name" => "required|string",
+            "type" => "required|in:store,producer",
+            "about" => "required|string"
+        ]);
+
+        Producer::create($request->all());
+
+        return response(status: 201);
     }
 
     /**

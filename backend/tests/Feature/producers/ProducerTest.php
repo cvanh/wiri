@@ -22,13 +22,34 @@ class ProducerTest extends TestCase
             "about" => "about"
         ];
 
-        $response = $this->actingAs($user)->postJson('/producer', $data);
+        $response = $this->actingAs($user)->postJson('/producer/create', $data);
 
         // where there errors?
-        $response->assertStatus(200);
+        $response->assertStatus(201);
 
         // check if it got inserted
         $this->assertDatabaseHas(config("constants.TABLE.PRODUCER_TABLE"), [
+            "name" => "wietje"
+        ]);
+    }
+
+    public function test_create_new_producer_unauthenticated(): void
+    {
+
+        $data = [
+            "name" => "wietje",
+            "type" => "store",
+            "about" => "about"
+        ];
+
+        $response = $this->postJson('/producer/create', $data);
+
+
+        // check to make shure the api refuses unauthenticated users
+        $response->assertStatus(401);
+
+        // makeshure it didnt got inserted
+        $this->assertDatabaseMissing(config("constants.TABLE.PRODUCER_TABLE"), [
             "name" => "wietje"
         ]);
     }
