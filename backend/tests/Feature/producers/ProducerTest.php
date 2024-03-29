@@ -23,7 +23,7 @@ class ProducerTest extends TestCase
             "about" => "about"
         ];
 
-        $response = $this->actingAs($user)->postJson('/producer/create', $data);
+        $response = $this->actingAs($user)->postJson('/api/producer/create', $data);
 
         // where there errors? and did it create a new producer
         $response->assertStatus(201);
@@ -43,7 +43,7 @@ class ProducerTest extends TestCase
             "about" => "about"
         ];
 
-        $response = $this->postJson('/producer/create', $data);
+        $response = $this->postJson('/api/producer/create', $data);
 
 
         // check to make shure the api refuses unauthenticated users
@@ -60,7 +60,7 @@ class ProducerTest extends TestCase
         $user = User::factory()->create();
         Producer::factory()->count(4)->create();
 
-        $response = $this->actingAs($user)->get('/producer');
+        $response = $this->actingAs($user)->get('/api/producer');
 
         // where there errors?
         $response->assertStatus(200);
@@ -73,7 +73,7 @@ class ProducerTest extends TestCase
     {
         Producer::factory()->count(4)->create();
 
-        $response = $this->get('/producer');
+        $response = $this->get('/api/producer');
 
         // make shure we arent logedin
         $this->assertGuest();
@@ -89,7 +89,7 @@ class ProducerTest extends TestCase
             "id" => "19E1612B7-48D6-4A0F-A0E6-A133FC88AC4023"
         ]);
 
-        $response = $this->actingAs($user)->getJson("/producer/19E1612B7-48D6-4A0F-A0E6-A133FC88AC4023");
+        $response = $this->actingAs($user)->getJson("/api/producer/19E1612B7-48D6-4A0F-A0E6-A133FC88AC4023");
 
         // where there errors
         $response->assertStatus(200);
@@ -109,7 +109,7 @@ class ProducerTest extends TestCase
             "id" => "19E1612B7-48D6-4A0F-A0E6-A133FC88AC4023"
         ]);
 
-        $response = $this->get("/producer/19E1612B7-48D6-4A0F-A0E6-A133FC88AC4023");
+        $response = $this->get("/api/producer/19E1612B7-48D6-4A0F-A0E6-A133FC88AC4023");
 
         // make shure we arent logedin
         $this->assertGuest();
