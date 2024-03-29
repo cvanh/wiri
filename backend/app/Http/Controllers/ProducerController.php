@@ -26,7 +26,6 @@ class ProducerController extends Controller
             "type" => "required|in:store,producer",
             "about" => "required|string"
         ]);
-
         $data = [
             "author_id" => Auth::user()->id,
             "name" => $request->name,

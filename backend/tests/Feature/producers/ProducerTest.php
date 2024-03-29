@@ -5,6 +5,7 @@ namespace Tests\Feature\Producers;
 use App\Models\Producer;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\TestCase;
 
@@ -15,7 +16,7 @@ class ProducerTest extends TestCase
     public function test_create_new_producer_authenticated(): void
     {
         $user = User::factory()->create();
-
+        
         $data = [
             "name" => "wietje",
             "type" => "store",
@@ -24,20 +25,18 @@ class ProducerTest extends TestCase
 
         $response = $this->actingAs($user)->postJson('/producer/create', $data);
 
-        $response->dump();
-
-        // where there errors?
+        // where there errors? and did it create a new producer
         $response->assertStatus(201);
 
-        // check if it got inserted
+        // check if it got inserted and it is linked to the user who owns the producer
         $this->assertDatabaseHas(config("constants.TABLE.PRODUCER_TABLE"), [
-            "name" => "wietje"
+            "name" => "wietje",
+            "author_id" => $user->id,
         ]);
     }
 
     public function test_create_new_producer_unauthenticated(): void
     {
-
         $data = [
             "name" => "wietje",
             "type" => "store",

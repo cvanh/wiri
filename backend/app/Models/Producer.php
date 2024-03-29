@@ -15,5 +15,5 @@ class Producer extends Model
     public $incrementing = false;
     protected $table = "producers";
 
-    protected $fillable = ["type", "name", "about"];
+    protected $fillable = ["type", "name", "about", "author_id"];
 }
