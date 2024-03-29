@@ -21,6 +21,7 @@ class ProducerFactory extends Factory
         return [
             'id' => fake()->uuid(),
             'type' => fake()->randomElement(["producer", "store"]),
+            'author_id' => fake()->randomNumber(),
             'name' => fake()->name(),
             'about' => fake()->paragraph()
         ];

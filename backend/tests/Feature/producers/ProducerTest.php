@@ -24,6 +24,8 @@ class ProducerTest extends TestCase
 
         $response = $this->actingAs($user)->postJson('/producer/create', $data);
 
+        $response->dump();
+
         // where there errors?
         $response->assertStatus(201);
 

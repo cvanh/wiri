@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Producer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProducerController extends Controller
 {
@@ -26,7 +27,14 @@ class ProducerController extends Controller
             "about" => "required|string"
         ]);
 
-        Producer::create($request->all());
+        $data = [
+            "author_id" => Auth::user()->id,
+            "name" => $request->name,
+            "type" => $request->type,
+            "about" => $request->about
+        ];
+
+        Producer::create($data);
 
         return response(status: 201);
     }
