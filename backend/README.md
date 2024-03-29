@@ -8,6 +8,8 @@ producers(stores, growers, transporters)
 products
 reviews
 
+## docs
+you can generate docs with `php artisan scribe:generate`
 
 ### db schema
 
@@ -21,7 +23,7 @@ erDiagram
         str password
         str remember_token
     }
-    PRODUCER { 
+    PRODUCERS { 
         uuid id 
         enum type store,producer, etc
         str name
