@@ -2,31 +2,58 @@ import React from "react";
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 import LoginCredential from "../types/LoginCredentialInterface";
 import * as SecureStore from "expo-secure-store";
+import * as Yup from "yup"
+import { ErrorMessage, Formik } from "formik";
 
 async function save(value: LoginCredential) {
+  console.log(value)
   await SecureStore.setItemAsync("login_credentials", JSON.stringify(value));
 }
 
+const LoginSchema = Yup.object().shape({
+  name: Yup.string()
+    .min(2, 'Too Short!')
+    .max(70, 'Too Long!')
+    .required('Required'),
+  email: Yup.string()
+    .email('Invalid email')
+    .required('Required'),
+});
+
 // TODO use correct types
-export default function LoginScreen({ navigation }): any {
-  const [key, onChangeKey] = React.useState('Your key here');
-  const [value, onChangeValue] = React.useState('Your value here');
+export default function LoginScreen() {
 
   return (
     <View>
-      <Button title="Go back" onPress={() => navigation.goBack()} />
-      <Text style={styles.paragraph}>Save an item, and grab it later!</Text>
-      <Button
-        title="Save this key/value pair"
-        onPress={(value) => {
-          save(value);
-        }}
-      />
-      <Text style={styles.paragraph}>🔐 Enter your key 🔐</Text>
-      <TextInput
-        style={styles.textInput}
-        placeholder="Enter the key for the value you want to get"
-      />
+      <Formik
+        initialValues={{ email: '', password: '' }}
+        onSubmit={values => save(values)}
+        validationSchema={LoginSchema}
+      >
+        {({ handleChange, handleBlur, handleSubmit, values }) => (
+          <View>
+
+            <ErrorMessage name="email" />
+            <TextInput
+              onChangeText={handleChange('email')}
+              style={styles.textInput}
+              placeholder="email"
+              onBlur={handleBlur('email')}
+              value={values.email}
+            />
+
+            <ErrorMessage name="password" />
+            <TextInput
+              onChangeText={handleChange('password')}
+              style={styles.textInput}
+              placeholder="password"
+              onBlur={handleBlur('password')}
+              value={values.password}
+            />
+            <Button onPress={handleSubmit} title="Submit" />
+          </View>
+        )}
+      </Formik>
     </View>
   );
 }
