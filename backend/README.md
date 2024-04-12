@@ -1,6 +1,9 @@
 # wiri backend
 this is the backend of wiri, It handles all of our request. the setup is just like any other basic laravel app.
 
+## setup
+install the packages using `composer install` and then copy the .env.example to .env. 
+
 ## boring design shit
 
 users 
@@ -53,3 +56,8 @@ erDiagram
     PRODUCER||--o{PRODUCT: "has"
     PRODUCT||--o{PRODUCT_META: "owns"
 ```
+
+
+## faq 
+**could not find driver (Connection: sqlite, SQL: PRAGMA foreign_keys = ON;)**
+you need to install the php-sqlite extension
