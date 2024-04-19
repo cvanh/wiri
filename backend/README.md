@@ -5,11 +5,11 @@ this is the backend of wiri, It handles all of our request. the setup is just li
 install the packages using `composer install` and then copy the .env.example to .env. 
 
 ## boring design shit
-
-users 
-producers(stores, growers, transporters)
-products
-reviews
+models: 
+    - users 
+    - producers(stores, growers, transporters)
+    - products(concentrates,buds, rolling paper)
+    - reviews/comments
 
 ## docs
 you can generate docs with `php artisan scribe:generate`
