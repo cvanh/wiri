@@ -57,6 +57,15 @@ erDiagram
     PRODUCT||--o{PRODUCT_META: "owns"
 ```
 
+## todo
+- [x] create user model
+- [x] create producer model that links to user
+- [ ] create product model
+- [ ] create review 
+- [ ] implement auth for producer
+- [ ] implement auth for review
+- [ ] add media to producer
+- [ ] add media to products
 
 ## faq 
 **could not find driver (Connection: sqlite, SQL: PRAGMA foreign_keys = ON;)**
