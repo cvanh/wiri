@@ -2,52 +2,49 @@ import React from "react";
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 import LoginCredential from "../types/LoginCredentialInterface";
 import * as SecureStore from "expo-secure-store";
-import * as Yup from "yup"
+import * as Yup from "yup";
 import { ErrorMessage, Formik } from "formik";
 
-async function save(value: LoginCredential) {
-  console.log(value)
+async function save(value: any) {
+  console.log(value);
   await SecureStore.setItemAsync("login_credentials", JSON.stringify(value));
+  console.log("asdasd");
 }
 
 const LoginSchema = Yup.object().shape({
   name: Yup.string()
-    .min(2, 'Too Short!')
-    .max(70, 'Too Long!')
-    .required('Required'),
-  email: Yup.string()
-    .email('Invalid email')
-    .required('Required'),
+    .min(2, "Too Short!")
+    .max(70, "Too Long!")
+    .required("Required"),
+  email: Yup.string().email("Invalid email").required("Required"),
 });
 
 // TODO use correct types
 export default function LoginScreen() {
-
   return (
     <View>
       <Formik
-        initialValues={{ email: '', password: '' }}
+        initialValues={{ email: "", password: "" }}
         onSubmit={values => save(values)}
         validationSchema={LoginSchema}
       >
         {({ handleChange, handleBlur, handleSubmit, values }) => (
           <View>
-
             <ErrorMessage name="email" />
             <TextInput
-              onChangeText={handleChange('email')}
+              onChangeText={handleChange("email")}
               style={styles.textInput}
               placeholder="email"
-              onBlur={handleBlur('email')}
+              onBlur={handleBlur("email")}
               value={values.email}
             />
 
             <ErrorMessage name="password" />
             <TextInput
-              onChangeText={handleChange('password')}
+              onChangeText={handleChange("password")}
               style={styles.textInput}
               placeholder="password"
-              onBlur={handleBlur('password')}
+              onBlur={handleBlur("password")}
               value={values.password}
             />
             <Button onPress={handleSubmit} title="Submit" />
@@ -61,21 +58,21 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: "center",
     paddingTop: 10,
-    backgroundColor: '#ecf0f1',
+    backgroundColor: "#ecf0f1",
     padding: 8,
   },
   paragraph: {
     marginTop: 34,
     margin: 24,
     fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontWeight: "bold",
+    textAlign: "center",
   },
   textInput: {
     height: 35,
-    borderColor: 'gray',
+    borderColor: "gray",
     borderWidth: 0.5,
     padding: 4,
   },
