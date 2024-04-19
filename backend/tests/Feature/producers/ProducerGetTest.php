@@ -77,21 +77,13 @@ class ProducerGetTest extends TestCase
 
     public function test_user_owns_producer(): void
     {
-        $author_id = 69420;
-
-        Producer::factory()->create([
-            "author_id" => $author_id
-        ]);
-
         $user = User::factory()->create();
+        Producer::factory()->create(["author_id" => $user->id]);
 
         $response = $this->actingAs($user)->getJson('/api/producer');
 
         $response->assertStatus(200);
 
-        $response->assertJson(
-            fn (AssertableJson $json) =>
-            $json->where("author_id", $author_id)->etc()
-        );
+        $response->assertJsonFragment(["author_id" => $user->id]);
     }
 }
