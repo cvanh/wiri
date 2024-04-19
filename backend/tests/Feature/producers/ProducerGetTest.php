@@ -19,7 +19,7 @@ class ProducerGetTest extends TestCase
 
         $response = $this->actingAs($user)->get('/api/producer');
 
-        // where there errors?
+        // were there errors?
         $response->assertStatus(200);
 
         // we just created 4 producers so we are expecting 4 producers
