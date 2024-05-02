@@ -81,6 +81,7 @@ class ProductsCreateTest extends TestCase
         Product::factory()->create();
 
         $response = $this->actingAs($user)->getJson('/api/product');
+        dd($response);
 
         $response->assertStatus(200);
 
