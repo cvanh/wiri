@@ -87,7 +87,6 @@ class ProductsCreateTest extends TestCase
         $response = $this->actingAs($user)->postJson('/api/product/create', $reqBody);
 
         $response->assertCreated();
-        dump($response->dump());
 
         $this->assertDatabaseHas("products", $reqBody);
     }
