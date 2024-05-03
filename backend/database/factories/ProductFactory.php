@@ -21,7 +21,7 @@ class ProductFactory extends Factory
             'id' => fake()->uuid(),
             'name' => fake()->name(),
             'description' => fake()->paragraph(),
-            'producer_id' => (Producer::factory()->create())->id
+            'producer_id' => (Producer::factory()->create())->getAttribute("id")
         ];
     }
 }

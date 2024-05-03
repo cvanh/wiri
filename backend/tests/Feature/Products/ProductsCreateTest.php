@@ -78,13 +78,17 @@ class ProductsCreateTest extends TestCase
     public function test_user_owns_product(): void
     {
         $user = User::factory()->create();
-        Product::factory()->create();
+        $reqBody = [
+            "name" => fake()->name(),
+            "description" => fake()->paragraph(),
+            "producer_id" => fake()->uuid()
+        ];
 
-        $response = $this->actingAs($user)->getJson('/api/product');
-        dd($response);
+        $response = $this->actingAs($user)->postJson('/api/product/create', $reqBody);
 
-        $response->assertStatus(200);
+        $response->assertCreated();
+        dump($response->dump());
 
-        $response->assertJsonFragment(["author_id" => $user->id]);
+        $this->assertDatabaseHas("products", $reqBody);
     }
 }

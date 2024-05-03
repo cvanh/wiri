@@ -13,5 +13,5 @@ class Product extends Model
     public $incrementing = false;
     protected $table = "products";
 
-    protected $fillable = ["name", "description"];
+    protected $fillable = ["name", "description", "producer_id"];
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
+use Symfony\Component\HttpFoundation\Response;
 
 class ProductController extends Controller
 {
@@ -13,7 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        Product::all();
+        return Product::all();
     }
 
     /**
@@ -21,15 +22,22 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        //
+        $data = [
+            "name" => $request->name,
+            "description" => $request->description,
+            "producer_id" => $request->producer_id
+        ];
+        Product::create($data);
+
+        return  Response(status: 201);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Product $product)
+    public function show($id)
     {
-        return Product::findOrFail(1);
+        return Product::findOrFail($id);
     }
 
     /**

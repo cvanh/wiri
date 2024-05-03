@@ -17,5 +17,5 @@ Route::middleware('auth:sanctum')->name('api.')->group(function () {
 
     Route::get("/product", [ProductController::class, "index"])->middleware("auth");
     Route::get("/product/{id}", [ProductController::class, "show"])->middleware("auth");
-    Route::post("/product/create", [ProducerController::class, "store"])->middleware("auth");
+    Route::post("/product/create", [ProductController::class, "store"])->middleware("auth");
 });
