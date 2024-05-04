@@ -1,20 +1,13 @@
 import React from "react";
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
-import LoginCredential from "../types/LoginCredentialInterface";
-import * as SecureStore from "expo-secure-store";
+import CredentialsModel from "../models/CredentailsModel"
+
 import * as Yup from "yup";
 import { ErrorMessage, Formik } from "formik";
 
-async function save(value: any) {
-  console.log(value);
-  await SecureStore.setItemAsync("login_credentials", JSON.stringify(value));
-  console.log("asdasd");
-}
-
 const LoginSchema = Yup.object().shape({
-  name: Yup.string()
-    .min(2, "Too Short!")
-    .max(70, "Too Long!")
+  password: Yup.string()
+    .min(8, "Too Short!")
     .required("Required"),
   email: Yup.string().email("Invalid email").required("Required"),
 });
@@ -25,7 +18,7 @@ export default function LoginScreen() {
     <View>
       <Formik
         initialValues={{ email: "", password: "" }}
-        onSubmit={values => save(values)}
+        onSubmit={values => CredentialsModel.set(values)}
         validationSchema={LoginSchema}
       >
         {({ handleChange, handleBlur, handleSubmit, values }) => (
