@@ -17,12 +17,10 @@ class DatabaseSeeder extends Seeder
         User::factory(10)->create();
 
         // create admin user for dev environment
-        if (app()->environment('local')) {
-            User::factory()->create([
-                'name' => 'Test admin',
-                'email' => 'admin@admin.test',
-                'password' => bcrypt("admin")
-            ]);
-        }
+        User::factory()->create([
+            'name' => 'Test admin',
+            'email' => 'admin@admin.test',
+            'password' => bcrypt("admin")
+        ]);
     }
 }

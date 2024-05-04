@@ -13,9 +13,6 @@ class ProducerSeeder extends Seeder
      */
     public function run(): void
     {
-        // only run in dev environment
-        if (app()->environment('local')) {
-            Producer::factory()->count(10)->create();
-        }
+        Producer::factory()->count(10)->create();
     }
 }
