@@ -40,11 +40,6 @@ class ProducerController extends Controller
 
     /**
      * Display the specified resource.
-     * @response {
-     * "author_id": "6151770A-5AD7-458E-B79B-5A417046ABE5",
-     * "type": "store",
-     * "about": "the shop is created in 2019" 
-     * }
      * @authenticated
      */
     public function show(string $id)
