@@ -12,8 +12,11 @@ class ProductDeleteTest extends TestCase
 
     public function test_owner_can_delete_product(): void
     {
-        $user = User::factory()->create();
         $product = Product::factory()->create();
+
+        // login as the product author
+        $user = $product->get_author();
+        
 
         $response = $this->actingAs($user)->delete("/api/product/{$product->getAttribute("id")}");
 
@@ -21,7 +24,7 @@ class ProductDeleteTest extends TestCase
         $this->assertSoftDeleted($product);
     }
 
-    public function test_non_owner_can_delete_product(): void
+    public function test_non_owner_cant_delete_product(): void
     {
         $user = User::factory()->create();
         $product = Product::factory()->create();
@@ -29,6 +32,6 @@ class ProductDeleteTest extends TestCase
         $response = $this->actingAs($user)->delete("/api/product/{$product->getAttribute("id")}");
 
         $response->assertStatus(204);
-        $this->assertSoftDeleted($product);
+        $this->assertModelExists($product);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -61,7 +62,7 @@ class ProductController extends Controller
             return Product::destroy($id);
         }
 
-        return Response(status: AccessDeniedException);
+        return Response(status: 204);
         
     }
 }
