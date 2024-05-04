@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
+use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Response;
 
 class ProductController extends Controller
@@ -37,6 +38,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
+        // TODO make return object
         return Product::findOrFail($id);
     }
 
@@ -51,8 +53,15 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        //
+        $product = Product::findOrFail($id);
+
+        if ($product->get_author()->id === Auth::User()->id) {
+            return Product::destroy($id);
+        }
+
+        return Response(status: AccessDeniedException);
+        
     }
 }

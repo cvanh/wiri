@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Producer;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,7 +22,7 @@ class ProducerFactory extends Factory
         return [
             'id' => fake()->uuid(),
             'type' => fake()->randomElement(["producer", "store"]),
-            'author_id' => fake()->randomNumber(),
+            'author_id' => User::factory()->create()->getAttribute("id"),
             'name' => fake()->name(),
             'about' => fake()->paragraph()
         ];

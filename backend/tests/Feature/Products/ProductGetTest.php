@@ -30,6 +30,6 @@ class ProductGetTest extends TestCase
 
         $response->assertStatus(200);
 
-        $response->assertValid();
+        $response->assertJsonFragment(["id" => $product->getAttribute("id")]);
     }
 }
