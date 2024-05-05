@@ -3,3 +3,5 @@ interface CredentailsInterface {
   password: string;
   token?: string;
 }
+
+export default CredentailsInterface;

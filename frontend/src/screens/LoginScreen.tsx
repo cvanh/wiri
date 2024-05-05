@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
-import CredentialsModel from "../models/CredentailsModel"
+import CredentialsModel from "../lib/models/CredentailsModel"
 
 import * as Yup from "yup";
 import { ErrorMessage, Formik } from "formik";
@@ -17,7 +17,7 @@ export default function LoginScreen() {
   return (
     <View>
       <Formik
-        initialValues={{ email: "", password: "" }}
+        initialValues={{ email: "admin@admin.test", password: "adminadmin" }}
         onSubmit={values => CredentialsModel.set(values)}
         validationSchema={LoginSchema}
       >
