@@ -9,6 +9,9 @@ class ApiModel {
         })
 
     }
+    static async getProducts() {
+        return Api().get("/api/product");
+    }
 
 }
 
