@@ -1,6 +1,4 @@
 import * as SecureStore from "expo-secure-store";
-import React from "react"
-import ApiModel from "./WiriModel";
 import CredentailsInterface from "../interfaces/CredentailsInterface";
 
 class CredentailsModel {
@@ -10,15 +8,11 @@ class CredentailsModel {
 
     static async set(data: CredentailsInterface) {
         console.info("saving credentials to secure store", data)
-
-        ApiModel.login(data);
-
-        // await SecureStore.setItemAsync(this._credKey, JSON.stringify(data))
+        // return await SecureStore.setItemAsync(this._credKey, JSON.stringify(data))
     }
 
     static async get(): Promise<CredentailsInterface | null> {
-        return;
-        return await SecureStore.getItemAsync(this._credKey)
+        // return await SecureStore.getItemAsync(this._credKey)
     }
 }
 

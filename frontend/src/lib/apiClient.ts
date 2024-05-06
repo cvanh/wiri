@@ -1,5 +1,6 @@
 import axios, { Axios, AxiosRequestConfig } from "axios";
 import ApiModel from "./models/WiriModel";
+import CredentailsModel from "./models/CredentailsModel";
 
 let ApiSingleton;
 
@@ -18,6 +19,7 @@ const Api = (config: AxiosRequestConfig = {}) => {
   // TODO make secure
   config.headers = {
     Authorization: `Bearer 1|nvjECkyMt5bHilsADWWWBgstEF1rqm3YO5UWXP8Jf8815309`,
+    // Authorization: `Bearer ${CredentailsModel.get()},
   };
 
   const NewApiInstance = axios.create(config);

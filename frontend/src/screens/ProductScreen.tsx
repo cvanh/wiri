@@ -8,11 +8,11 @@ export default function ProductScreen() {
     useEffect(() => {
         async function getProducts() {
             const data = await ApiModel.getProducts()
-            console.log(data)
-            // setproducts(data);
+            setproducts(data);
         }
         getProducts()
-    }, [products]);
+    }, []);
+
     console.log(products)
     return (
         <View>

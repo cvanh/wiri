@@ -4,6 +4,7 @@ import CredentialsModel from "../lib/models/CredentailsModel"
 
 import * as Yup from "yup";
 import { ErrorMessage, Formik } from "formik";
+import ApiModel from "../lib/models/WiriModel";
 
 const LoginSchema = Yup.object().shape({
   password: Yup.string()
@@ -18,7 +19,7 @@ export default function LoginScreen() {
     <View>
       <Formik
         initialValues={{ email: "admin@admin.test", password: "adminadmin" }}
-        onSubmit={values => CredentialsModel.set(values)}
+        onSubmit={values => ApiModel.login(values)}
         validationSchema={LoginSchema}
       >
         {({ handleChange, handleBlur, handleSubmit, values }) => (
