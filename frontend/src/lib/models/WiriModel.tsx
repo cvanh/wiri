@@ -1,14 +1,19 @@
 import Api from "../apiClient";
 import CredentailsInterface from "../interfaces/CredentailsInterface";
+import UserInterface from "../interfaces/UserInterface";
 
 class ApiModel {
     static getCsrfToken() {
         Api().head("/sanctum/csrf-cookie")
     }
 
-    static login(credentials: CredentailsInterface) {
+    static async getCurrentUser(): Promise<UserInterface> {
+        return await Api().get("/api/user")
+    }
+
+    static async login(credentials: CredentailsInterface) {
         this.getCsrfToken();
-        Api().post("/login", {
+        await Api().post("/login", {
             email: credentials.email,
             password: credentials.password
         })

@@ -13,8 +13,6 @@ class CredentailsModel {
 
         ApiModel.login(data);
 
-
-
         // await SecureStore.setItemAsync(this._credKey, JSON.stringify(data))
     }
 
