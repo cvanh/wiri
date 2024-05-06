@@ -5,11 +5,14 @@ import ApiModel from '../lib/models/ApiModel';
 export default function ProductScreen() {
     const [products, setproducts] = useState();
 
-    useEffect(async () => {
-        const data = await ApiModel.getProducts()
-        setproducts(data);
-
-    }, []);
+    useEffect(() => {
+        async function getProducts() {
+            const data = await ApiModel.getProducts()
+            console.log(data)
+            // setproducts(data);
+        }
+        getProducts()
+    }, [products]);
     console.log(products)
     return (
         <View>

@@ -10,7 +10,9 @@ class ApiModel {
 
     }
     static async getProducts() {
-        return Api().get("/api/product");
+        const k = await Api().get("/api/product");
+        console.log(k)
+        return k
     }
 
 }
