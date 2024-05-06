@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import ApiModel from '../lib/models/ApiModel';
+import ApiModel from '../lib/models/WiriModel';
 
 export default function ProductScreen() {
     const [products, setproducts] = useState();

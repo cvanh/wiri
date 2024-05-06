@@ -1,6 +1,6 @@
 import * as SecureStore from "expo-secure-store";
 import React from "react"
-import ApiModel from "./ApiModel";
+import ApiModel from "./WiriModel";
 import CredentailsInterface from "../interfaces/CredentailsInterface";
 
 class CredentailsModel {
