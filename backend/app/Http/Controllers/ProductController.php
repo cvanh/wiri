@@ -6,13 +6,12 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
-use Symfony\Component\HttpFoundation\Response;
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
+     * @authenticated
      */
     public function index()
     {
@@ -21,6 +20,7 @@ class ProductController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     * @authenticaed
      */
     public function store(StoreProductRequest $request)
     {
@@ -36,6 +36,7 @@ class ProductController extends Controller
 
     /**
      * Display the specified resource.
+     * @authenticated
      */
     public function show($id)
     {
@@ -45,6 +46,7 @@ class ProductController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * @authenticated
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
@@ -53,6 +55,7 @@ class ProductController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     * @authenticated
      */
     public function destroy($id)
     {

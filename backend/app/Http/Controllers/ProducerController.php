@@ -10,6 +10,7 @@ class ProducerController extends Controller
 {
     /**
      * Display a listing of the resource.
+     * @authenticated
      */
     public function index()
     {
@@ -18,6 +19,7 @@ class ProducerController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     * @authenticated
      */
     public function store(Request $request)
     {
@@ -49,6 +51,7 @@ class ProducerController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * @authenticated
      */
     public function update(Request $request, string $id)
     {
@@ -57,6 +60,7 @@ class ProducerController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     * @authenticated
      */
     public function destroy(string $id)
     {
