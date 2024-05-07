@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use PO;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,14 +14,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // create 10 sample users
-        User::factory(10)->create();
-
-        // create admin user for dev environment
-        User::factory()->create([
-            'name' => 'Test admin',
-            'email' => 'admin@admin.test',
-            'password' => bcrypt("adminadmin")
+        $this->call([
+            ProducerSeeder::class,
+            ProductSeeder::class,
+            UserSeeder::class
         ]);
     }
 }
