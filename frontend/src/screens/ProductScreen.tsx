@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Image } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import ApiModel from '../lib/models/WiriModel';
 
@@ -16,12 +16,12 @@ export default function ProductScreen() {
     console.log(products)
     return (
         <View style={style.container}>
-            <Text>ProductScreen</Text>
+            {/* <Text>ProductScreen</Text> */}
             {products?.map((product) => (
-                <View style={style.product} key={product.id}>
+                <View style={style.container} key={product.id}>
+                    <Image src='./assets/placeholder.png' />
                     <Text>{product.name}</Text>
-                    <Text>{product.description}</Text>
-                    <Text>{product.name}</Text>
+                    <Text style={style.productDescription}>{product.description}</Text>
                 </View>
             ))}
         </View>
@@ -36,15 +36,15 @@ const style = StyleSheet.create({
         backgroundColor: "#ecf0f1",
         padding: 8,
     },
-    title: {
-
-    },
     product: {
         // marginTop: 34,
-        margin: 24,
+        margin: 5,
         fontSize: 18,
-        width: 100,
+        width: "50%",
         fontWeight: "bold",
-        textAlign: "center",
+    },
+    productDescription: {
+        fontSize: 12
+
     }
 })
