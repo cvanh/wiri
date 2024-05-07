@@ -7,10 +7,10 @@ let ApiSingleton;
 const Api = (config: AxiosRequestConfig = {}) => {
   // check if there is already a api instance with the backend
   if (ApiSingleton) {
-    console.info("using apisingleton");
+    console.debug("using apisingleton");
     return ApiSingleton;
   }
-  console.info("creating new wiri api instance");
+  console.debug("creating new wiri api instance");
 
   config.baseURL = "http://localhost:8000";
   config.withCredentials = true;
@@ -18,7 +18,7 @@ const Api = (config: AxiosRequestConfig = {}) => {
 
   // TODO make secure
   config.headers = {
-    Authorization: `Bearer 1|nvjECkyMt5bHilsADWWWBgstEF1rqm3YO5UWXP8Jf8815309`,
+    Authorization: `Bearer 1|0I6qSWBoRmbI0szoFEZ8taRWpF6eE1xjxoKUUTdm94af97f1`,
     // Authorization: `Bearer ${CredentailsModel.get()},
   };
 

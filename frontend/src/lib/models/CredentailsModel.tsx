@@ -7,7 +7,7 @@ class CredentailsModel {
 
 
     static async set(data: CredentailsInterface) {
-        console.info("saving credentials to secure store", data)
+        console.debug("saving credentials to secure store", data)
         // return await SecureStore.setItemAsync(this._credKey, JSON.stringify(data))
     }
 
