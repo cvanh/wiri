@@ -70,6 +70,7 @@ erDiagram
 - [ ] implement auth for review
 - [ ] add media to producer
 - [ ] add media to products
+- [ ] implement $user-can() in be
 
 ## faq 
 **could not find driver (Connection: sqlite, SQL: PRAGMA foreign_keys = ON;)**
