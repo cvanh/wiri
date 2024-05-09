@@ -33,6 +33,9 @@ class ProductUpdateTest extends TestCase
         $user = User::factory()->create();
         $product = Product::factory()->create();
 
+        // check if the user doesnt own the product
+        $this->assertNotEquals($user->id, $product->get_author()->id);
+
         $data = [
             "name" => fake()->name(),
             "description" => fake()->paragraph()

@@ -14,7 +14,7 @@ class UpdateProductRequest extends FormRequest
     public function authorize(): bool
     {
         $product = Product::find($this->id);
-        return $product->get_author() && $this->user();
+        return (bool)$product->get_author() && $this->user();
     }
 
     /**
