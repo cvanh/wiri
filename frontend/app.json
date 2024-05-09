@@ -17,7 +17,10 @@
     "ios": {
       "supportsTablet": true
     },
+    
     "android": {
+"package": "nl.wiri.app",
+"versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"

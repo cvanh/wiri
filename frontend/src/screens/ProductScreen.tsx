@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, Image } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import ApiModel from '../lib/models/WiriModel';
 
-export default function ProductScreen() {
+export default function ProductScreen({ navigator }) {
     const [products, setproducts] = useState();
 
     useEffect(() => {
@@ -19,7 +19,7 @@ export default function ProductScreen() {
             {/* <Text>ProductScreen</Text> */}
             {products?.map((product) => (
                 <View style={style.container} key={product.id}>
-                    <Image src='./assets/placeholder.png' />
+                    <Image source='./assets/placeholder.png' />
                     <Text>{product.name}</Text>
                     <Text style={style.productDescription}>{product.description}</Text>
                 </View>
