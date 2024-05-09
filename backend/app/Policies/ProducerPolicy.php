@@ -13,7 +13,7 @@ class ProducerPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -21,7 +21,7 @@ class ProducerPolicy
      */
     public function view(User $user, Producer $producer): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -29,7 +29,7 @@ class ProducerPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -37,7 +37,7 @@ class ProducerPolicy
      */
     public function update(User $user, Producer $producer): bool
     {
-        //
+        return $user->id == $producer->author_id;
     }
 
     /**
@@ -45,7 +45,7 @@ class ProducerPolicy
      */
     public function delete(User $user, Producer $producer): bool
     {
-        //
+        return $user->id == $producer->author_id;
     }
 
     /**
@@ -53,7 +53,7 @@ class ProducerPolicy
      */
     public function restore(User $user, Producer $producer): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -61,6 +61,6 @@ class ProducerPolicy
      */
     public function forceDelete(User $user, Producer $producer): bool
     {
-        //
+        return false;
     }
 }
