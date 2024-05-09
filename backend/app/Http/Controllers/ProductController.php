@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreProductRequest;
-use App\Http\Requests\UpdateProductRequest;
+use App\Http\Requests\Product\StoreProductRequest;
+use App\Http\Requests\Product\UpdateProductRequest;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 
@@ -50,7 +50,12 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        //
+        $data = [
+            "name" => $request->name,
+            "description" => $request->description,
+        ];
+
+        return Product::updateOrCreate(["id" => $request->id], $data);
     }
 
     /**
