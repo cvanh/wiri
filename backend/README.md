@@ -28,15 +28,18 @@ erDiagram
     }
     PRODUCERS { 
         uuid id 
-        enum type store,producer, etc
+        enum type "store producer"
         str name
         str about
-        str tags
     }
-    PRODUCT {
+    PRODUCTS {
         uuid id
         str name
-
+        str about
+        uuid producer_id 
+        timestamp created_at
+        timestamp updated_at
+        timestamp deleted_at
     }
     PRODUCT_META {
         uuid id
@@ -48,13 +51,14 @@ erDiagram
     REVIEW {
         uuid id 
         uuid author_id 
+        str content
         bool approved
     }
 
-    USER||--o{PRODUCER : "is"
+    USER||--o{PRODUCERS : "is"
     USER||--o{REVIEW: "has"
-    PRODUCER||--o{PRODUCT: "has"
-    PRODUCT||--o{PRODUCT_META: "owns"
+    PRODUCERS||--o{PRODUCTS: "has"
+    PRODUCTS||--o{PRODUCT_META: "owns"
 ```
 
 ## todo
