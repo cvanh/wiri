@@ -20,7 +20,7 @@ class ProductDeleteTest extends TestCase
 
         $response = $this->actingAs($user)->delete("/api/product/{$product->getAttribute("id")}");
 
-        $response->assertStatus(200);
+        $response->assertSuccessful();
         $this->assertSoftDeleted($product);
     }
 
@@ -31,7 +31,7 @@ class ProductDeleteTest extends TestCase
 
         $response = $this->actingAs($user)->delete("/api/product/{$product->getAttribute("id")}");
 
-        $response->assertStatus(204);
+        $response->assertForbidden();
         $this->assertModelExists($product);
     }
 }

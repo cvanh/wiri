@@ -68,11 +68,12 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
 
-        if ($product->get_author()->id === Auth::User()->id) {
-            return Product::destroy($id);
+        if (!Gate::authorize("delete", $product)) {
+            abort(403);
         }
 
-        return Response(status: 204);
+        return Product::destroy($id);
+
         
     }
 }
