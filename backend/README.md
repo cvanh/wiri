@@ -71,6 +71,7 @@ erDiagram
 - [ ] add media to producer
 - [ ] add media to products
 - [ ] implement $user-can() in be
+- [ ] do security audit of fillible fields 
 
 ## faq 
 **could not find driver (Connection: sqlite, SQL: PRAGMA foreign_keys = ON;)**
