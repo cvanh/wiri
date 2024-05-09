@@ -6,6 +6,7 @@ use App\Http\Requests\Product\StoreProductRequest;
 use App\Http\Requests\Product\UpdateProductRequest;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class ProductController extends Controller
 {
@@ -50,12 +51,13 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        $data = [
-            "name" => $request->name,
-            "description" => $request->description,
-        ];
+        $product = Product::findOrFail($request->id);
 
-        return Product::updateOrCreate(["id" => $request->id], $data);
+        if (!Gate::authorize("update", $product)) {
+            abort(403);
+        }
+
+        return $product->update($request->all());
     }
 
     /**

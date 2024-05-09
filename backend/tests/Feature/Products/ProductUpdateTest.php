@@ -13,8 +13,8 @@ class ProductUpdateTest extends TestCase
 
     public function test_update_product_authorized(): void
     {
-        $user = User::factory()->create();
         $product = Product::factory()->create();
+        $user = $product->get_author();
 
         $data = [
             "name" => fake()->name(),
@@ -33,9 +33,6 @@ class ProductUpdateTest extends TestCase
         $user = User::factory()->create();
         $product = Product::factory()->create();
 
-        // check if the user doesnt own the product
-        $this->assertNotEquals($user->id, $product->get_author()->id);
-
         $data = [
             "name" => fake()->name(),
             "description" => fake()->paragraph()
@@ -43,7 +40,7 @@ class ProductUpdateTest extends TestCase
 
         $response = $this->actingAs($user)->postJson("/api/product/{$product->id}", $data);
 
-        $response->assertUnauthorized();
+        $response->assertForbidden();
         $this->assertDatabaseMissing("products", ["id" => $product->id, ...$data]);
     }
 }
