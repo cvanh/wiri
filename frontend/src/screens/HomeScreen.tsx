@@ -1,7 +1,6 @@
 import { View, Text, Button } from "react-native";
 
 function HomeScreen({ navigation }) {
-  NavigationHelpersCommon;
   return (
     <View
       style={{
