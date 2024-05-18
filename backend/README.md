@@ -7,7 +7,7 @@ install the packages using `composer install` and then copy the .env.example to 
 ## boring design shit
 models: 
     - users 
-    - producers(stores, growers, transporters)
+    - companies(stores, growers, transporters)
     - products(concentrates,buds, rolling paper)
     - reviews/comments
 
@@ -63,12 +63,12 @@ erDiagram
 
 ## todo
 - [x] create user model
-- [x] create producer model that links to user
+- [x] create company model that links to user
 - [ ] create product model
 - [ ] create review 
-- [ ] implement auth for producer
+- [ ] implement auth for company
 - [ ] implement auth for review
-- [ ] add media to producer
+- [ ] add media to company
 - [ ] add media to products
 - [ ] implement $user-can() in be
 - [ ] do security audit of fillible fields 

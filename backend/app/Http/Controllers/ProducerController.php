@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Producer;
+use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,7 +14,7 @@ class ProducerController extends Controller
      */
     public function index()
     {
-        return Producer::all();
+        return Company::all();
     }
 
     /**
@@ -25,7 +25,7 @@ class ProducerController extends Controller
     {
         $request->validate([
             "name" => "required|string",
-            "type" => "required|in:store,producer",
+            "type" => "required|in:store,company",
             "about" => "required|string"
         ]);
         $data = [
@@ -35,7 +35,7 @@ class ProducerController extends Controller
             "about" => $request->about
         ];
 
-        Producer::create($data);
+        Company::create($data);
 
         return response(status: 201);
     }
@@ -46,7 +46,7 @@ class ProducerController extends Controller
      */
     public function show(string $id)
     {
-        return Producer::findOrFail($id);
+        return Company::findOrFail($id);
     }
 
     /**

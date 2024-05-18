@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Producer;
+use App\Models\Company;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,7 +21,7 @@ class ProductFactory extends Factory
             'id' => fake()->uuid(),
             'name' => fake()->name(),
             'description' => fake()->paragraph(),
-            'producer_id' => Producer::factory()->create()->getAttribute("id")
+            'producer_id' => Company::factory()->create()->getAttribute("id")
         ];
     }
 }

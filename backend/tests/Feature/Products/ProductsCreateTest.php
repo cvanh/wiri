@@ -22,7 +22,7 @@ class ProductsCreateTest extends TestCase
         // were there errors?
         $response->assertStatus(200);
 
-        // we just created 4 products so we are expecting 4 producers
+        // we just created 4 products so we are expecting 4 companies
         $response->assertJsonCount(4);
     }
 

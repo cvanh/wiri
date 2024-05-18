@@ -12,9 +12,9 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 
 // TODO refactor into seprate routes
 Route::middleware('auth:sanctum')->name('api.')->group(function () {
-    Route::get("/producer", [ProducerController::class, "index"])->middleware("auth");
-    Route::get("/producer/{id}", [ProducerController::class, "show"])->middleware("auth");
-    Route::post("/producer/create", [ProducerController::class, "store"])->middleware("auth");
+    Route::get("/company", [ProducerController::class, "index"])->middleware("auth");
+    Route::get("/company/{id}", [ProducerController::class, "show"])->middleware("auth");
+    Route::post("/company/create", [ProducerController::class, "store"])->middleware("auth");
 
     Route::get("/product", [ProductController::class, "index"])->middleware("auth");
     Route::get("/product/{id}", [ProductController::class, "show"])->middleware("auth");

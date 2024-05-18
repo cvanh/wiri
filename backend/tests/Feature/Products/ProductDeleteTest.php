@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Producer;
+use App\Models\Company;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;

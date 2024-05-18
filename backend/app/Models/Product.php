@@ -17,16 +17,16 @@ class Product extends Model
 
     protected $fillable = ["name", "description", "producer_id"];
 
-    // get author of producer that owns this product
+    // get author of company that owns this product
     public function get_author(): User
     {
-        $producer = $this->get_producer();
-        return User::find($producer->author_id);
+        $company = $this->get_producer();
+        return User::find($company->author_id);
     }
 
-    // get producer model
-    public function get_producer(): Producer
+    // get company model
+    public function get_producer(): Company
     {
-        return Producer::find($this->producer_id);
+        return Company::find($this->producer_id);
     }
 }

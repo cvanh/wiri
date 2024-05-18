@@ -1,8 +1,8 @@
 <?php
 
-namespace Tests\Feature\Producers;
+namespace Tests\Feature\Companies;
 
-use App\Models\Producer;
+use App\Models\Company;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Testing\Fluent\AssertableJson;
@@ -15,22 +15,22 @@ class ProducerGetTest extends TestCase
     public function test_producers_are_listed_authenticated(): void
     {
         $user = User::factory()->create();
-        Producer::factory()->count(4)->create();
+        Company::factory()->count(4)->create();
 
-        $response = $this->actingAs($user)->get('/api/producer');
+        $response = $this->actingAs($user)->get('/api/company');
 
         // were there errors?
         $response->assertStatus(200);
 
-        // we just created 4 producers so we are expecting 4 producers
+        // we just created 4 companies so we are expecting 4 companies
         $response->assertJsonCount(4);
     }
 
     public function test_producers_are_listed_unauthenticated(): void
     {
-        Producer::factory()->count(4)->create();
+        Company::factory()->count(4)->create();
 
-        $response = $this->get('/api/producer');
+        $response = $this->get('/api/company');
 
         // make shure we arent logedin
         $this->assertGuest();
@@ -42,16 +42,16 @@ class ProducerGetTest extends TestCase
     public function test_show_producer_authenticated(): void
     {
         $user = User::factory()->create();
-        Producer::factory()->create([
+        Company::factory()->create([
             "id" => "19E1612B7-48D6-4A0F-A0E6-A133FC88AC4023"
         ]);
 
-        $response = $this->actingAs($user)->getJson("/api/producer/19E1612B7-48D6-4A0F-A0E6-A133FC88AC4023");
+        $response = $this->actingAs($user)->getJson("/api/company/19E1612B7-48D6-4A0F-A0E6-A133FC88AC4023");
 
         // where there errors
         $response->assertStatus(200);
 
-        // check if we got an object of the producer which we requested
+        // check if we got an object of the company which we requested
         $response->assertJson(
             fn (AssertableJson $json) =>
             $json
@@ -62,11 +62,11 @@ class ProducerGetTest extends TestCase
 
     public function test_show_producer_unauthenticated(): void
     {
-        Producer::factory()->create([
+        Company::factory()->create([
             "id" => "19E1612B7-48D6-4A0F-A0E6-A133FC88AC4023"
         ]);
 
-        $response = $this->get("/api/producer/19E1612B7-48D6-4A0F-A0E6-A133FC88AC4023");
+        $response = $this->get("/api/company/19E1612B7-48D6-4A0F-A0E6-A133FC88AC4023");
 
         // make shure we arent logedin
         $this->assertGuest();
@@ -78,9 +78,9 @@ class ProducerGetTest extends TestCase
     public function test_user_owns_producer(): void
     {
         $user = User::factory()->create();
-        Producer::factory()->create(["author_id" => $user->id]);
+        Company::factory()->create(["author_id" => $user->id]);
 
-        $response = $this->actingAs($user)->getJson('/api/producer');
+        $response = $this->actingAs($user)->getJson('/api/company');
 
         $response->assertStatus(200);
 

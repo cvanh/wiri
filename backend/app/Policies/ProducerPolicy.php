@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-use App\Models\Producer;
+use App\Models\Company;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
@@ -19,7 +19,7 @@ class ProducerPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Producer $producer): bool
+    public function view(User $user, Company $company): bool
     {
         return true;
     }
@@ -35,23 +35,23 @@ class ProducerPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Producer $producer): bool
+    public function update(User $user, Company $company): bool
     {
-        return $user->id == $producer->author_id;
+        return $user->id == $company->author_id;
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Producer $producer): bool
+    public function delete(User $user, Company $company): bool
     {
-        return $user->id == $producer->author_id;
+        return $user->id == $company->author_id;
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Producer $producer): bool
+    public function restore(User $user, Company $company): bool
     {
         return false;
     }
@@ -59,7 +59,7 @@ class ProducerPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Producer $producer): bool
+    public function forceDelete(User $user, Company $company): bool
     {
         return false;
     }

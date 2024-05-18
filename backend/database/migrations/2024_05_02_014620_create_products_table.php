@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Producer;
+use App\Models\Company;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,7 +16,7 @@ return new class extends Migration
             $table->uuid("id")->primary();
             $table->string("name");
             $table->string("description");
-            $table->foreignIdFor(Producer::class, "producer_id");
+            $table->foreignIdFor(Company::class, "producer_id");
             $table->timestamps();
             $table->softDeletes();
         });
