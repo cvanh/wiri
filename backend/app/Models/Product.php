@@ -29,4 +29,10 @@ class Product extends Model
     {
         return Company::find($this->producer_id);
     }
+
+    public function meta()
+    {
+        return $this->belongsToMany(ProductMeta::class);
+    }
+
 }

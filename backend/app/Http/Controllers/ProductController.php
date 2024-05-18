@@ -42,7 +42,7 @@ class ProductController extends Controller
     public function show($id)
     {
         // TODO make return object
-        return Product::findOrFail($id);
+        return Product::findOrFail($id)->first()->get();
     }
 
     /**

@@ -31,5 +31,7 @@ class ProductGetTest extends TestCase
         $response->assertStatus(200);
 
         $response->assertJsonFragment(["id" => $product->getAttribute("id")]);
+
+        $response->assertJsonIsArray("meta");
     }
 }
