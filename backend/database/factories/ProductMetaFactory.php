@@ -20,7 +20,7 @@ class ProductMetaFactory extends Factory
     {
         return [
             'id' => fake()->uuid(),
-            'product_id' => fake()->randomElement(Product::all())["id"],
+            'product_id' => Product::factory()->create()->id,
             'meta_key' =>  fake()->randomElement(["image_url", "reports"]),
             'meta_value' => fake()->name()
         ];

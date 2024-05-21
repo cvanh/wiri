@@ -44,8 +44,11 @@ erDiagram
     PRODUCT_META {
         uuid id
         uuid product_id
-        str meta_key
-        str meta_value
+        str key
+        str value
+        datetime created_at
+        datetime updated_at
+        datetime deleted_at
     }
 
     REVIEW {

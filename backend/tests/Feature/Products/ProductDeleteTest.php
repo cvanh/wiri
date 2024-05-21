@@ -22,6 +22,9 @@ class ProductDeleteTest extends TestCase
 
         $response->assertSuccessful();
         $this->assertSoftDeleted($product);
+
+        // meta data related to the product should be marked for removal
+        $this->assertSoftDeleted("product_meta", ["product_id" => $product->id]);
     }
 
     public function test_non_owner_cant_delete_product(): void
@@ -33,5 +36,8 @@ class ProductDeleteTest extends TestCase
 
         $response->assertForbidden();
         $this->assertModelExists($product);
+
+        // check if the the mete data related to the product where not deleted
+        $this->assertDatabaseHas("product_meta", ["product_id" => $product->id]);
     }
 }
