@@ -21,6 +21,14 @@ class ProductMeta extends Model
         "meta_value"
     ];
 
+    // we hide the dates because it doesnt concern the user when shit happend
+    protected $hidden = [
+        "deleted_at",
+        "updated_at",
+        "created_at",
+        "product_id"
+    ];
+
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);

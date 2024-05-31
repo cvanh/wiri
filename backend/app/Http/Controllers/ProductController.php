@@ -7,11 +7,12 @@ use App\Http\Requests\Product\UpdateProductRequest;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Test\Constraint\ResponseIsSuccessful;
 
 class ProductController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource. doesnt show product meta
      * @authenticated
      */
     public function index()
@@ -30,10 +31,13 @@ class ProductController extends Controller
             "description" => $request->description,
             "producer_id" => $request->producer_id
         ];
-        Product::create($data);
+        $product = Product::create($data);
 
-        // TODO add product meta
-
+        // meta data is all extra data related to a product
+        if (is_array($request->meta)) {
+            $product->productMeta()->saveMany($request->meta);
+        }
+        
         return  Response(status: 201);
     }
 
@@ -43,8 +47,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        // TODO make return object
-        return Product::findOrFail($id)->first()->get();
+        return Product::with("productMeta")->find($id);
     }
 
     /**
@@ -58,8 +61,19 @@ class ProductController extends Controller
         if (!Gate::authorize("update", $product)) {
             abort(403);
         }
+        // TODO add product meta that can be edited
 
-        return $product->update($request->all());
+        $productUpdate = [
+            "name" => $request->name,
+            "description" => $request->description,
+        ];
+
+        $product->update($productUpdate);
+
+        if (is_array($request->meta)) {
+            $product->productMeta()->update();
+        }
+        return Response(); 
     }
 
     /**

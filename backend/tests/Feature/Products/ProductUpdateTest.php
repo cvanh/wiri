@@ -43,4 +43,23 @@ class ProductUpdateTest extends TestCase
         $response->assertForbidden();
         $this->assertDatabaseMissing("products", ["id" => $product->id, ...$data]);
     }
+
+    public function test_update_product_meta(): void
+    {
+        $user = User::factory()->create();
+        $product = Product::factory()->hasproductMeta(3)->create();
+
+        // $data = [
+        //     "name" => fake()->name(),
+        //     "description" => fake()->paragraph(),
+        //     "meta" => [[
+        //         "meta_key" => "",
+        //         "meta_value" => ""
+        //     ]]
+        // ];
+        $data = $product->toArray();
+
+        $response = $this->actingAs($user)->postJson("/api/product/{$product->id}", $data);
+        $response->assertSuccessful();
+    }
 }

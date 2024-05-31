@@ -19,6 +19,13 @@ class ProductGetTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertJsonCount(5);
+        $response->assertJsonStructure([
+            "*" => [
+                "id",
+                "description",
+                "producer_id"
+            ]
+        ]);
     }
 
     public function test_get_single_product(): void
@@ -30,9 +37,17 @@ class ProductGetTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertJsonFragment(["id" => $product->id]);
-        // $response->assertJsonStructure([
-        //     "id",
-        //     "meta"
-        // ]);
+        $response->assertJsonStructure([
+            "id",
+            "description",
+            "producer_id",
+            "product_meta" => [
+                "*" => [
+                    "id",
+                    "meta_key",
+                    "meta_value"
+                ]
+            ]
+        ]);
     }
 }
