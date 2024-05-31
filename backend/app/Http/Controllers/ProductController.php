@@ -1,14 +1,13 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Product\StoreProductRequest;
 use App\Http\Requests\Product\UpdateProductRequest;
 use App\Models\Product;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
-class ProductController extends Controller
+final class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,13 +25,13 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         $data = [
-            "name" => $request->name,
-            "description" => $request->description,
-            "producer_id" => $request->producer_id
+            'name' => $request->name,
+            'description' => $request->description,
+            'producer_id' => $request->producer_id,
         ];
         Product::create($data);
 
-        return  Response(status: 201);
+        return Response(status: 201);
     }
 
     /**
@@ -53,7 +52,7 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($request->id);
 
-        if (!Gate::authorize("update", $product)) {
+        if (!Gate::authorize('update', $product)) {
             abort(403);
         }
 
@@ -68,12 +67,10 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
 
-        if (!Gate::authorize("delete", $product)) {
+        if (!Gate::authorize('delete', $product)) {
             abort(403);
         }
 
         return Product::destroy($id);
-
-        
     }
 }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -11,15 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('producers', function (Blueprint $table) {
-            $table->uuid("id")->primary();
-            $table->enum("type", ["store", "producer"]);
-            $table->string("name");
-            $table->string("about");
-            $table->timestamp("updated_at");
-            $table->timestamp("created_at");
+        Schema::create('producers', static function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->enum('type', ['store', 'producer']);
+            $table->string('name');
+            $table->string('about');
+            $table->timestamp('updated_at');
+            $table->timestamp('created_at');
         });
     }
+
     /**
      * Reverse the migrations.
      */

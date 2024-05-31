@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tests\Feature\products;
 
@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\TestCase;
 
-class ProductsCreateTest extends TestCase
+final class ProductsCreateTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -36,26 +36,25 @@ class ProductsCreateTest extends TestCase
         $this->assertGuest();
 
         // we arent loged in so we should expect an redirect
-        $response->assertRedirect("/login");
+        $response->assertRedirect('/login');
     }
 
     public function test_show_product_authenticated(): void
     {
         $user = User::factory()->create();
         Product::factory()->create([
-            "id" => "19E1612B7-48D6-4A0F-A0E6-A133FC88AC4023"
+            'id' => '19E1612B7-48D6-4A0F-A0E6-A133FC88AC4023',
         ]);
 
-        $response = $this->actingAs($user)->getJson("/api/product/19E1612B7-48D6-4A0F-A0E6-A133FC88AC4023");
+        $response = $this->actingAs($user)->getJson('/api/product/19E1612B7-48D6-4A0F-A0E6-A133FC88AC4023');
 
         // where there errors
         $response->assertStatus(200);
 
         // check if we got an object of the product which we requested
         $response->assertJson(
-            fn (AssertableJson $json) =>
-            $json
-                ->where("id", "19E1612B7-48D6-4A0F-A0E6-A133FC88AC4023")
+            static fn (AssertableJson $json) => $json
+                ->where('id', '19E1612B7-48D6-4A0F-A0E6-A133FC88AC4023')
                 ->etc()
         );
     }
@@ -63,31 +62,31 @@ class ProductsCreateTest extends TestCase
     public function test_show_product_unauthenticated(): void
     {
         Product::factory()->create([
-            "id" => "19E1612B7-48D6-4A0F-A0E6-A133FC88AC4023"
+            'id' => '19E1612B7-48D6-4A0F-A0E6-A133FC88AC4023',
         ]);
 
-        $response = $this->get("/api/product/19E1612B7-48D6-4A0F-A0E6-A133FC88AC4023");
+        $response = $this->get('/api/product/19E1612B7-48D6-4A0F-A0E6-A133FC88AC4023');
 
         // make shure we arent logedin
         $this->assertGuest();
 
         // we arent loged in so we should expect an redirect
-        $response->assertRedirect("/login");
+        $response->assertRedirect('/login');
     }
 
     public function test_user_owns_product(): void
     {
         $user = User::factory()->create();
         $reqBody = [
-            "name" => fake()->name(),
-            "description" => fake()->paragraph(),
-            "producer_id" => fake()->uuid()
+            'name' => fake()->name(),
+            'description' => fake()->paragraph(),
+            'producer_id' => fake()->uuid(),
         ];
 
         $response = $this->actingAs($user)->postJson('/api/product/create', $reqBody);
 
         $response->assertCreated();
 
-        $this->assertDatabaseHas("products", $reqBody);
+        $this->assertDatabaseHas('products', $reqBody);
     }
 }

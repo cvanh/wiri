@@ -1,11 +1,11 @@
-<?php
+<?php declare(strict_types=1);
 
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class ProductGetTest extends TestCase
+final class ProductGetTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -30,6 +30,6 @@ class ProductGetTest extends TestCase
 
         $response->assertStatus(200);
 
-        $response->assertJsonFragment(["id" => $product->getAttribute("id")]);
+        $response->assertJsonFragment(['id' => $product->getAttribute('id')]);
     }
 }

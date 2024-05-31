@@ -1,12 +1,11 @@
-<?php
+<?php declare(strict_types=1);
 
-use App\Models\Company;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class ProductDeleteTest extends TestCase
+final class ProductDeleteTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -16,7 +15,6 @@ class ProductDeleteTest extends TestCase
 
         // login as the product author
         $user = $product->get_author();
-        
 
         $response = $this->actingAs($user)->delete("/api/product/{$product->getAttribute("id")}");
 

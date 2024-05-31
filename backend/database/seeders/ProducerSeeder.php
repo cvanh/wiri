@@ -1,12 +1,11 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Database\Seeders;
 
 use App\Models\Company;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ProducerSeeder extends Seeder
+final class ProducerSeeder extends Seeder
 {
     /**
      * Run the database seeds.

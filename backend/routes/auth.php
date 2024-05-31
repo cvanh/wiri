@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
@@ -41,7 +41,7 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
 
 // TODO write test
-Route::post('/sanctum/token', function (Request $request) {
+Route::post('/sanctum/token', static function (Request $request) {
     $request->validate([
         'email' => 'required|email',
         'password' => 'required',
