@@ -32,6 +32,8 @@ class ProductController extends Controller
         ];
         Product::create($data);
 
+        // TODO add product meta
+
         return  Response(status: 201);
     }
 
@@ -71,7 +73,7 @@ class ProductController extends Controller
         if (!Gate::authorize("delete", $product)) {
             abort(403);
         }
-
+        $product->productMeta()->delete();
         return Product::destroy($id);
 
         

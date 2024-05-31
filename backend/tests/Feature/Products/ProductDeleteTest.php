@@ -12,7 +12,7 @@ class ProductDeleteTest extends TestCase
 
     public function test_owner_can_delete_product(): void
     {
-        $product = Product::factory()->create();
+        $product = Product::factory()->hasProductMeta(10)->create();
 
         // login as the product author
         $user = $product->get_author();
@@ -30,7 +30,7 @@ class ProductDeleteTest extends TestCase
     public function test_non_owner_cant_delete_product(): void
     {
         $user = User::factory()->create();
-        $product = Product::factory()->create();
+        $product = Product::factory()->hasProductMeta(10)->create();
 
         $response = $this->actingAs($user)->delete("/api/product/{$product->getAttribute("id")}");
 

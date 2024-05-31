@@ -19,10 +19,8 @@ class ProductMetaFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => fake()->uuid(),
-            'product_id' => Product::factory()->create()->id,
             'meta_key' =>  fake()->randomElement(["image_url", "reports"]),
-            'meta_value' => fake()->name()
+            'meta_value' => fake()->name(),
         ];
     }
 }

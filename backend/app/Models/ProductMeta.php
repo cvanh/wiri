@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ProductMeta extends Model
@@ -15,7 +16,12 @@ class ProductMeta extends Model
     public $incrementing = false;
     protected $table = "product_meta";
 
-    public function product()
+    protected $fillable = [
+        "meta_key",
+        "meta_value"
+    ];
+
+    public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
     }
