@@ -1,11 +1,11 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
-class UserSeeder extends Seeder
+final class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,10 +16,10 @@ class UserSeeder extends Seeder
         User::factory(10)->create();
 
         // create admin user for dev environment
-        User::firstOrCreate(["name" => "Test admin"], [
+        User::firstOrCreate(['name' => 'Test admin'], [
             'name' => 'Test admin',
             'email' => 'admin@admin.test',
-            'password' => bcrypt("adminadmin")
+            'password' => bcrypt('adminadmin'),
         ]);
     }
 }

@@ -1,12 +1,11 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Policies;
 
 use App\Models\Product;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
-class ProductPolicy
+final class ProductPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -37,7 +36,7 @@ class ProductPolicy
      */
     public function update(User $user, Product $product): bool
     {
-        return $user->id == $product->get_author()->id;
+        return $user->id === $product->get_author()->id;
     }
 
     /**
@@ -45,7 +44,7 @@ class ProductPolicy
      */
     public function delete(User $user, Product $product): bool
     {
-        return $user->id == $product->get_author()->id;
+        return $user->id === $product->get_author()->id;
     }
 
     /**

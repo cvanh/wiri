@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tests\Feature\products;
 
@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class ProductUpdateTest extends TestCase
+final class ProductUpdateTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -17,15 +17,15 @@ class ProductUpdateTest extends TestCase
         $user = $product->get_author();
 
         $data = [
-            "name" => fake()->name(),
-            "description" => fake()->paragraph()
+            'name' => fake()->name(),
+            'description' => fake()->paragraph(),
         ];
 
         $response = $this->actingAs($user)->postJson("/api/product/{$product->id}", $data);
 
         $response->assertSuccessful();
 
-        $this->assertDatabaseHas("products", ["id" => $product->id, ...$data]);
+        $this->assertDatabaseHas('products', ['id' => $product->id, ...$data]);
     }
 
     public function test_update_product_unauthorized(): void
@@ -34,14 +34,14 @@ class ProductUpdateTest extends TestCase
         $product = Product::factory()->create();
 
         $data = [
-            "name" => fake()->name(),
-            "description" => fake()->paragraph()
+            'name' => fake()->name(),
+            'description' => fake()->paragraph(),
         ];
 
         $response = $this->actingAs($user)->postJson("/api/product/{$product->id}", $data);
 
         $response->assertForbidden();
-        $this->assertDatabaseMissing("products", ["id" => $product->id, ...$data]);
+        $this->assertDatabaseMissing('products', ['id' => $product->id, ...$data]);
     }
 
     public function test_update_product_meta(): void

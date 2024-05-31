@@ -1,12 +1,11 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Policies;
 
 use App\Models\Company;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
-class ProducerPolicy
+final class ProducerPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -37,7 +36,7 @@ class ProducerPolicy
      */
     public function update(User $user, Company $company): bool
     {
-        return $user->id == $company->author_id;
+        return $user->id === $company->author_id;
     }
 
     /**
@@ -45,7 +44,7 @@ class ProducerPolicy
      */
     public function delete(User $user, Company $company): bool
     {
-        return $user->id == $company->author_id;
+        return $user->id === $company->author_id;
     }
 
     /**

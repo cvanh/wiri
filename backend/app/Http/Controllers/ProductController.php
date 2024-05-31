@@ -1,15 +1,13 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Product\StoreProductRequest;
 use App\Http\Requests\Product\UpdateProductRequest;
 use App\Models\Product;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
-use Symfony\Component\HttpFoundation\Test\Constraint\ResponseIsSuccessful;
 
-class ProductController extends Controller
+final class ProductController extends Controller
 {
     /**
      * Display a listing of the resource. doesnt show product meta
@@ -27,9 +25,9 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         $data = [
-            "name" => $request->name,
-            "description" => $request->description,
-            "producer_id" => $request->producer_id
+            'name' => $request->name,
+            'description' => $request->description,
+            'producer_id' => $request->producer_id,
         ];
         $product = Product::create($data);
 
@@ -37,8 +35,8 @@ class ProductController extends Controller
         if (is_array($request->meta)) {
             $product->productMeta()->saveMany($request->meta);
         }
-        
-        return  Response(status: 201);
+
+        return Response(status: 201);
     }
 
     /**
@@ -47,7 +45,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        return Product::with("productMeta")->find($id);
+        return Product::with('productMeta')->find($id);
     }
 
     /**
@@ -58,14 +56,15 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($request->id);
 
-        if (!Gate::authorize("update", $product)) {
+        if (!Gate::authorize('update', $product)) {
             abort(403);
         }
+
         // TODO add product meta that can be edited
 
         $productUpdate = [
-            "name" => $request->name,
-            "description" => $request->description,
+            'name' => $request->name,
+            'description' => $request->description,
         ];
 
         $product->update($productUpdate);
@@ -73,7 +72,8 @@ class ProductController extends Controller
         if (is_array($request->meta)) {
             $product->productMeta()->update();
         }
-        return Response(); 
+
+        return Response();
     }
 
     /**
@@ -84,12 +84,11 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
 
-        if (!Gate::authorize("delete", $product)) {
+        if (!Gate::authorize('delete', $product)) {
             abort(403);
         }
+
         $product->productMeta()->delete();
         return Product::destroy($id);
-
-        
     }
 }

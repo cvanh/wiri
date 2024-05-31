@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
@@ -6,7 +6,7 @@ use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class ProducerController extends Controller
+final class ProducerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,15 +24,15 @@ class ProducerController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            "name" => "required|string",
-            "type" => "required|in:store,company",
-            "about" => "required|string"
+            'name' => 'required|string',
+            'type' => 'required|in:store,company',
+            'about' => 'required|string',
         ]);
         $data = [
-            "author_id" => Auth::user()->id,
-            "name" => $request->name,
-            "type" => $request->type,
-            "about" => $request->about
+            'author_id' => Auth::user()->id,
+            'name' => $request->name,
+            'type' => $request->type,
+            'about' => $request->about,
         ];
 
         Company::create($data);
@@ -55,7 +55,6 @@ class ProducerController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
     }
 
     /**
@@ -64,6 +63,5 @@ class ProducerController extends Controller
      */
     public function destroy(string $id)
     {
-        //
     }
 }

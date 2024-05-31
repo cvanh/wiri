@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Models;
 
@@ -8,25 +8,27 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ProductMeta extends Model
+final class ProductMeta extends Model
 {
-    use HasFactory, SoftDeletes, HasUuids;
+    use HasFactory;
+    use SoftDeletes;
+    use HasUuids;
 
-    protected $primaryKey = "id";
+    protected $primaryKey = 'id';
     public $incrementing = false;
-    protected $table = "product_meta";
+    protected $table = 'product_meta';
 
     protected $fillable = [
-        "meta_key",
-        "meta_value"
+        'meta_key',
+        'meta_value',
     ];
 
     // we hide the dates because it doesnt concern the user when shit happend
     protected $hidden = [
-        "deleted_at",
-        "updated_at",
-        "created_at",
-        "product_id"
+        'deleted_at',
+        'updated_at',
+        'created_at',
+        'product_id',
     ];
 
     public function product(): BelongsTo

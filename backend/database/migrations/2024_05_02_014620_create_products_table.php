@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 use App\Models\Company;
 use Illuminate\Database\Migrations\Migration;
@@ -12,11 +12,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
-            $table->uuid("id")->primary();
-            $table->string("name");
-            $table->string("description");
-            $table->foreignIdFor(Company::class, "producer_id");
+        Schema::create('products', static function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->string('name');
+            $table->string('description');
+            $table->foreignIdFor(Company::class, 'producer_id');
             $table->timestamps();
             $table->softDeletes();
         });

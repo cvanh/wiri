@@ -1,12 +1,11 @@
-<?php
+<?php declare(strict_types=1);
 
-use App\Models\Company;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class ProductDeleteTest extends TestCase
+final class ProductDeleteTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -16,7 +15,6 @@ class ProductDeleteTest extends TestCase
 
         // login as the product author
         $user = $product->get_author();
-        
 
         $response = $this->actingAs($user)->delete("/api/product/{$product->getAttribute("id")}");
 
@@ -24,7 +22,7 @@ class ProductDeleteTest extends TestCase
         $this->assertSoftDeleted($product);
 
         // meta data related to the product should be marked for removal
-        $this->assertSoftDeleted("product_meta", ["product_id" => $product->id]);
+        $this->assertSoftDeleted('product_meta', ['product_id' => $product->id]);
     }
 
     public function test_non_owner_cant_delete_product(): void
@@ -38,6 +36,6 @@ class ProductDeleteTest extends TestCase
         $this->assertModelExists($product);
 
         // check if the the mete data related to the product where not deleted
-        $this->assertDatabaseHas("product_meta", ["product_id" => $product->id]);
+        $this->assertDatabaseHas('product_meta', ['product_id' => $product->id]);
     }
 }

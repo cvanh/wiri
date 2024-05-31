@@ -1,12 +1,11 @@
-<?php
+<?php declare(strict_types=1);
 
 use App\Models\Product;
-use App\Models\ProductMeta;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class ProductGetTest extends TestCase
+final class ProductGetTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -20,11 +19,11 @@ class ProductGetTest extends TestCase
         $response->assertStatus(200);
         $response->assertJsonCount(5);
         $response->assertJsonStructure([
-            "*" => [
-                "id",
-                "description",
-                "producer_id"
-            ]
+            '*' => [
+                'id',
+                'description',
+                'producer_id',
+            ],
         ]);
     }
 
@@ -36,18 +35,18 @@ class ProductGetTest extends TestCase
         $response = $this->actingAs($user)->get("/api/product/{$product->getAttribute('id')}");
 
         $response->assertStatus(200);
-        $response->assertJsonFragment(["id" => $product->id]);
+        $response->assertJsonFragment(['id' => $product->id]);
         $response->assertJsonStructure([
-            "id",
-            "description",
-            "producer_id",
-            "product_meta" => [
-                "*" => [
-                    "id",
-                    "meta_key",
-                    "meta_value"
-                ]
-            ]
+            'id',
+            'description',
+            'producer_id',
+            'product_meta' => [
+                '*' => [
+                    'id',
+                    'meta_key',
+                    'meta_value',
+                ],
+            ],
         ]);
     }
 }
