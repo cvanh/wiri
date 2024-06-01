@@ -21,4 +21,11 @@ final class ProductFactory extends Factory
             'producer_id' => Company::factory()->create()->getAttribute('id'),
         ];
     }
+
+    public function producer($id): static
+    {
+        return $this->state(fn (array $attributes) => [
+            "producer_id" => $id
+        ]);
+    }
 }

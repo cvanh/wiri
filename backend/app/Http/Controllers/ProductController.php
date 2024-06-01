@@ -70,7 +70,7 @@ final class ProductController extends Controller
         $product->update($productUpdate);
 
         if (is_array($request->meta)) {
-            // $product->productMeta()->update();
+            $product->productMeta()->updateMany($request->meta);
         }
 
         return Response(status: 200);

@@ -48,13 +48,14 @@ final class ProductUpdateTest extends TestCase
     {
         $user = User::factory()->create();
         $product = Product::factory()->hasproductMeta(3)->create();
+        // TODO doesnt work yet bc user and product arent linked in this test
 
         // $data = [
         //     "name" => fake()->name(),
         //     "description" => fake()->paragraph(),
         //     "meta" => [[
-        //         "meta_key" => "",
-        //         "meta_value" => ""
+        //         "meta_key" => "price",
+        //         "meta_value" => "100"
         //     ]]
         // ];
         $data = $product->toArray();
