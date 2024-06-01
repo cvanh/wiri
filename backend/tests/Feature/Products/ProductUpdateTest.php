@@ -60,6 +60,7 @@ final class ProductUpdateTest extends TestCase
         $data = $product->toArray();
 
         $response = $this->actingAs($user)->postJson("/api/product/{$product->id}", $data);
+
         $response->assertSuccessful();
     }
 }

@@ -33,7 +33,7 @@ final class ProductController extends Controller
 
         // meta data is all extra data related to a product
         if (is_array($request->meta)) {
-            $product->productMeta()->saveMany($request->meta);
+            $product->productMeta()->createMany($request->get("meta"));
         }
 
         return Response(status: 201);
@@ -70,10 +70,10 @@ final class ProductController extends Controller
         $product->update($productUpdate);
 
         if (is_array($request->meta)) {
-            $product->productMeta()->update();
+            // $product->productMeta()->update();
         }
 
-        return Response();
+        return Response(status: 200);
     }
 
     /**

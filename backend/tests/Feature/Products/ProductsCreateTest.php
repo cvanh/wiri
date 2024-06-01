@@ -42,10 +42,15 @@ final class ProductsCreateTest extends TestCase
         ];
 
         $response = $this->actingAs($user)->postJson('/api/product/create', $reqBody);
+        $response->dump();
 
         $response->assertSuccessful();
 
-        $this->assertDatabaseHas('products', $reqBody);
+        $this->assertDatabaseHas('products', [
+            "name" => $reqBody["name"],
+            "description" => $reqBody["description"],
+            "producer_id" => $reqBody["producer_id"]
+        ]);
         $this->assertDatabaseHas('product_meta', [$reqBody['meta']]);
     }
 }

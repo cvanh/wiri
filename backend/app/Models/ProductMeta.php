@@ -20,7 +20,7 @@ final class ProductMeta extends Model
 
     protected $fillable = [
         'meta_key',
-        'meta_value',
+        'meta_value'
     ];
 
     // we hide the dates because it doesnt concern the user when shit happend
