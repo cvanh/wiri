@@ -26,6 +26,7 @@ class ApiModel {
             console.error("error while logging in")
         }
         credentials.token = loginRes.data
+        console.log(credentials)
 
         CredentailsModel.set(credentials)
     }
