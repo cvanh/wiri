@@ -1,13 +1,15 @@
 import { View, Text, StyleSheet, Image } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import ApiModel from '../lib/models/WiriModel';
+import React, { useContext, useEffect, useState } from 'react'
+import ApiContext from '../lib/apiClient';
 
 export default function ProductScreen({ navigator }) {
+    const { apiClient } = useContext(ApiContext)
     const [products, setproducts] = useState();
 
     useEffect(() => {
         async function getProducts() {
-            const data = await ApiModel.getProducts()
+            const data = await apiClient({ method: "GET", uri: "/api/product" })
+            console.log('product data fetch', data)
             setproducts(data.data);
         }
         getProducts()
@@ -16,7 +18,7 @@ export default function ProductScreen({ navigator }) {
     console.log(products)
     return (
         <View style={style.container}>
-            {/* <Text>ProductScreen</Text> */}
+            <Text>ProductScreen</Text>
             {products?.map((product) => (
                 <View style={style.container} key={product.id}>
                     <Image source='./assets/placeholder.png' />

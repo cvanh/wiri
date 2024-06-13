@@ -6,6 +6,7 @@ import LoginScreen from "./src/screens/LoginScreen";
 import HomeScreen from "./src/screens/HomeScreen";
 import ProductScreen from "./src/screens/ProductScreen";
 import CredentailsModel from "./src/lib/models/CredentailsModel";
+import { ApiProvider } from "./src/lib/apiClient";
 
 const Stack = createNativeStackNavigator();
 
@@ -24,19 +25,21 @@ function App() {
   console.debug("asd", loggedIn);
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        {!loggedIn ? (
-          <Stack.Screen name="login" component={LoginScreen} />
-        ) : (
-          <>
-            <Stack.Screen name="Home" component={HomeScreen} />
-            <Stack.Screen name="Login" component={LoginScreen} />
-            <Stack.Screen name="Product" component={ProductScreen} />
-          </>
-        )}
-      </Stack.Navigator>
-    </NavigationContainer>
+    <ApiProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          {!loggedIn ? (
+            <Stack.Screen name="login" component={LoginScreen} />
+          ) : (
+            <>
+              <Stack.Screen name="Home" component={HomeScreen} />
+              <Stack.Screen name="Login" component={LoginScreen} />
+              <Stack.Screen name="Product" component={ProductScreen} />
+            </>
+          )}
+        </Stack.Navigator>
+      </NavigationContainer>
+    </ApiProvider>
   );
 }
 
