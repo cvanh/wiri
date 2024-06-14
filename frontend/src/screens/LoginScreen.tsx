@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 import CredentialsModel from "../lib/models/CredentailsModel"
 
 import * as Yup from "yup";
 import { ErrorMessage, Formik } from "formik";
-import ApiModel from "../lib/models/WiriModel";
+import ApiContext from "../lib/apiClient";
 
 const LoginSchema = Yup.object().shape({
   password: Yup.string()
@@ -15,11 +15,35 @@ const LoginSchema = Yup.object().shape({
 
 // TODO use correct types
 export default function LoginScreen() {
+  const { apiClient } = useContext(ApiContext)
+
+  const login = async (values) => {
+    await apiClient({ method: "head", uri: "/sanctum/csrf-cookie" })
+
+    const loginRes = await apiClient({
+      method: "POST",
+      uri: "/sanctum/token",
+      body: {
+        email: values.email,
+        password: values.password,
+        device_name: "wiri app"
+      }
+    })
+
+    if (loginRes.status !== 200 || !loginRes.data) {
+      // TODO implement
+      console.error("error while logging in")
+    }
+    values.token = loginRes.data
+    console.log(values)
+
+    CredentialsModel.set(values)
+  }
   return (
     <View>
       <Formik
         initialValues={{ email: "admin@admin.test", password: "adminadmin" }}
-        onSubmit={values => ApiModel.login(values)}
+        onSubmit={values => login(values)}
         validationSchema={LoginSchema}
       >
         {({ handleChange, handleBlur, handleSubmit, values }) => (

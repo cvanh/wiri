@@ -15,7 +15,7 @@ class ApiModel {
     // login and persist jwt
     static async login(credentials: CredentailsInterface) {
         await this.getCsrfToken();
-        const loginRes = await Api().post("/sanctum/token", {
+        const loginRes = await Api("/sanctum/token", {
             email: credentials.email,
             password: credentials.password,
             device_name: "wiri app"
