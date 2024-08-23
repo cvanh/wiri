@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
+import { Button, Text, View } from 'react-native';
 import axiosInstance from '../../lib/axiosInterceptor';
 import ProductInterface from '../../lib/interfaces/ProductInterface';
 
-const ProductDetail = ({ route }) => {
+const ProductDetail = ({ route, navigation }) => {
     const [Product, setProduct] = useState<ProductInterface>();
     const { id } = route.params
     useEffect(() => {
@@ -21,6 +21,8 @@ const ProductDetail = ({ route }) => {
                     <Text>{Product.description}</Text>
                     <Text>{Product.deleted_at}</Text>
                     <Text>{Product.created_at}</Text>
+                    <Text>{Product.producer_id}</Text>
+                    <Button title="view company" onPress={() => navigation.navigate("CompanyDetail", { id: Product.producer_id })} />
                     {Product.product_meta.map((meta) => (
                         <Text key={meta.meta_id}>{meta.meta_key}:{meta.meta_value}</Text>
                     ))}
