@@ -2,7 +2,7 @@ import axios from 'axios'
 import CredentailsModel from './models/CredentailsModel'
 
 const axiosInstance = axios.create({
-    baseURL: 'http://192.168.2.8:8080',
+    baseURL: process.env.EXPO_PUBLIC_API_URL,
     withCredentials: true,
     withXSRFToken: true,
 })

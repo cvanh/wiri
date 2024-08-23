@@ -39,3 +39,6 @@ yarn-error.*
 
 # @end expo-cli
 android
+
+.env*
+!.env.example
