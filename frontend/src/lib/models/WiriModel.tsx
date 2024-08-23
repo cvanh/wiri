@@ -1,4 +1,3 @@
-import Api from "../apiClient";
 import CredentailsInterface from "../interfaces/CredentailsInterface";
 import UserInterface from "../interfaces/UserInterface";
 import CredentailsModel from "./CredentailsModel";

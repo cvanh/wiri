@@ -1,14 +1,13 @@
 import { View, Text, StyleSheet, Image } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
-import ApiContext from '../lib/apiClient';
+import axiosInstance from '../lib/axiosInterceptor';
 
 export default function ProductScreen({ navigator }) {
-    const { apiClient } = useContext(ApiContext)
     const [products, setproducts] = useState();
 
     useEffect(() => {
         async function getProducts() {
-            const data = await apiClient({ method: "GET", uri: "/api/product" })
+            const data = await axiosInstance.get("/api/product")
             console.log('product data fetch', data)
             setproducts(data.data);
         }

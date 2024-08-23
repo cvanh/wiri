@@ -4,7 +4,7 @@ import CredentialsModel from "../lib/models/CredentailsModel"
 
 import * as Yup from "yup";
 import { ErrorMessage, Formik } from "formik";
-import ApiContext from "../lib/apiClient";
+import axiosInstance from "../lib/axiosInterceptor";
 
 const LoginSchema = Yup.object().shape({
   password: Yup.string()
@@ -15,28 +15,13 @@ const LoginSchema = Yup.object().shape({
 
 // TODO use correct types
 export default function LoginScreen() {
-  const { apiClient } = useContext(ApiContext)
-
   const login = async (values) => {
-    await apiClient({ method: "head", uri: "/sanctum/csrf-cookie" })
-
-    const loginRes = await apiClient({
-      method: "POST",
-      uri: "/sanctum/token",
-      body: {
-        email: values.email,
-        password: values.password,
-        device_name: "wiri app"
-      }
+    const res = await axiosInstance.post("/sanctum/token", {
+      email: values.email,
+      password: values.password,
+      device_name: "wiri app"
     })
-
-    if (loginRes.status !== 200 || !loginRes.data) {
-      // TODO implement
-      console.error("error while logging in")
-    }
-    values.token = loginRes.data
-    console.log(values)
-
+    values.token = res.data
     CredentialsModel.set(values)
   }
   return (
