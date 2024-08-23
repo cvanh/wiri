@@ -1,6 +1,7 @@
 import Mapbox, { Image } from '@rnmapbox/maps';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import axiosInstance from '../lib/axiosInterceptor';
 
 Mapbox.setAccessToken(process.env.EXPO_PUBLIC_MAPBOX_PUBLIC_KEY);
 const ANNOTATION_SIZE = 50;
@@ -12,27 +13,41 @@ const corners = [
     },
 ];
 
-const MapScreen = () => {
-    const onUserMarkerPress = (): void => {
-        console.log('You pressed on the user location annotation');
-    };
+const MapScreen = ({ navigation }) => {
+    const [Companies, setCompanies] = useState();
+    useEffect(() => {
+        async function GetCompanies() {
+            const res = await axiosInstance.get(`/api/company/`)
+            const list = res.data.map((company) => {
+                return {
+                    id: company.id,
+                    name: company.name,
+                    coordinate: [company.longitude, company.latitude],
+                    anchor: { x: 1 / 3, y: 0 },
+                }
+            })
+            setCompanies(list)
+        }
+        GetCompanies()
+    }, [])
+
     return (
         <View style={styles.container}>
             <Mapbox.MapView style={styles.map}>
-                <Mapbox.Camera followZoomLevel={12} followUserLocation />
-                <Mapbox.UserLocation onPress={onUserMarkerPress} />
+                <Mapbox.Camera followZoomLevel={8} followUserLocation />
+                <Mapbox.UserLocation />
 
-                {corners.map((p, i) => (
+                {Companies && Companies.map((p, i) => (
                     <Mapbox.PointAnnotation
-                        key={`square-${i}`}
-                        id={`square-${i}`}
+                        key={`company-${i}`}
+                        id={`company-${i}`}
                         coordinate={p.coordinate}
+                        onSelected={() => { navigation.navigate("CompanyDetail", { id: p.id }) }}
                         anchor={p.anchor}
                     >
                         <View style={styles.small}>
                             <Text style={[styles.text]}>
-                                x={p.anchor.x.toPrecision(2)}, y={p.anchor.y.toPrecision(2)}
-                                kaas
+                                {p.name} 
                             </Text>
                         </View>
                     </Mapbox.PointAnnotation>
@@ -44,19 +59,12 @@ const MapScreen = () => {
 
 const styles = StyleSheet.create({
     small: {
-        backgroundColor: 'blue',
+        backgroundColor: "hsla(143.11926605504587, 43.77510040160642%, 48.8235294117647%, 0.273)",
+        borderRadius: 100,
         height: ANNOTATION_SIZE,
         justifyContent: 'center',
         width: ANNOTATION_SIZE,
-        flex: 1,
-    },
-    large: {
-        borderColor: 'blue',
-        backgroundColor: 'transparent',
-        borderWidth: StyleSheet.hairlineWidth,
-        height: ANNOTATION_SIZE * 2,
-        justifyContent: 'center',
-        width: ANNOTATION_SIZE * 2,
+        textAlign: "center",
         flex: 1,
     },
     text: {

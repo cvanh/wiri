@@ -9,10 +9,11 @@ export default function ProductScreen({ navigator, navigation }): any {
     useEffect(() => {
         async function getProducts() {
             const data = await axiosInstance.get("/api/product")
+            console.log(data)
             setproducts(data.data);
         }
         getProducts()
-    });
+    }, []);
 
     navigation.setOptions({
         headerRight: () => (
@@ -23,7 +24,7 @@ export default function ProductScreen({ navigator, navigation }): any {
         <View>
             <Text>ProductScreen</Text>
             <ScrollView>
-                {products?.map((product) => (
+                {products && products?.map((product) => (
                     <TouchableHighlight key={product.id} onPress={() => { navigation.navigate("ProductDetail", { id: product.id }) }}>
                         <View className="m-2" >
                             {/* <Image source={require('../../assets/placeholder.png')} /> */}

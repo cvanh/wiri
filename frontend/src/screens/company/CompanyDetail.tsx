@@ -13,10 +13,13 @@ const CompanyDetail = ({ route }) => {
         }
         GetCompany()
     }, [])
+    console.log(Company)
 
     return (
         <View>
             {Company?.name && <Text>name: {Company.name}</Text>}
+            {Company?.longitude && <Text>longitude: {Company.longitude}</Text>}
+            {Company?.latitude && <Text>latitude: {Company.latitude}</Text>}
         </View>
     );
 }
