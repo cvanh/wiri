@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
 import axiosInstance from '../lib/axiosInterceptor';
+import UserInterface from '../lib/interfaces/UserInterface';
 
 const ProfileScreen = () => {
-    const [User, setUser] = useState()
+    const [User, setUser] = useState<UserInterface>()
 
     useEffect(() => {
         async function GetUser() {
@@ -12,7 +13,7 @@ const ProfileScreen = () => {
         }
         GetUser()
     }, [])
-    console.log(User)
+
     return (
         <View>
             <Text>your profile:</Text>
