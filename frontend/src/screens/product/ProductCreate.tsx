@@ -16,9 +16,19 @@ const ProductSchema = Yup.object().shape({
     producer_id: Yup.string().required()
 });
 
+const PickMetaArray = (array) => {
+    let newArr;
+
+    const
+
+    return newArr
+}
+
 export default function ProductCreate() {
     const [displayMessage, setDisplayMessage] = useState<String>();
     const [Companies, setCompanies] = useState();
+    const [MetaFieldCount, setMetaFieldCount] = useState(1);
+
     useMemo(() => {
         async function GetCompanies() {
             const res = await axiosInstance.get(`/api/company/`)
@@ -27,14 +37,18 @@ export default function ProductCreate() {
         GetCompanies()
     }, [])
 
-
-
-
     const createProduct = async (values) => {
+        console.log(values)
         const res = await axiosInstance.post("/api/product/create", {
             name: values.name,
             description: values.description,
-            producer_id: values.producer_id
+            producer_id: values.producer_id,
+            meta: [
+                {
+                    "meta_key-1": "typekaas",
+                    "meta_value-1": "kaas",
+                }
+            ]
         })
         if (res.status == 201) {
             setDisplayMessage("success")
@@ -84,6 +98,33 @@ export default function ProductCreate() {
                                 />
                             ))}
                         </Picker>
+
+                        {[...Array(MetaFieldCount)].map((_, i) => (
+                            <View key={`meta_field-${i}`}>
+                                <ErrorMessage name="meta_key" />
+                                <StyledTextInput
+                                    onChangeText={handleChange(`meta_key-${i}`)}
+                                    placeholder={`meta_key-${i}`}
+                                    onBlur={handleBlur(`meta_key-${i}`)}
+
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                                    value={values.meta_key[i]}
+                                />
+
+                                <ErrorMessage name="meta_value" />
+                                <StyledTextInput
+                                    onChangeText={handleChange(`meta_key-${i}`)}
+                                    placeholder={`meta_value-${i}`}
+                                    onBlur={handleBlur(`meta_value-${i}`)}
+
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                                    value={values[`meta_value-${i}`]}
+                                />
+                            </View>
+                        ))}
+
+                        <Button onPress={() => setMetaFieldCount(MetaFieldCount + 1)} title='add meta field' />
+
                         <StyledButton className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onPress={handleSubmit} title="Submit" />
                     </View>
                 )}
