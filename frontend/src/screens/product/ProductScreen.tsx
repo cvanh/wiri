@@ -12,7 +12,7 @@ export default function ProductScreen({ navigator, navigation }): any {
             setproducts(data.data);
         }
         getProducts()
-    }, []);
+    });
 
     navigation.setOptions({
         headerRight: () => (

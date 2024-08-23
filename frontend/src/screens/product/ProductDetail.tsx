@@ -23,8 +23,8 @@ const ProductDetail = ({ route, navigation }) => {
                     <Text>{Product.created_at}</Text>
                     <Text>{Product.producer_id}</Text>
                     <Button title="view company" onPress={() => navigation.navigate("CompanyDetail", { id: Product.producer_id })} />
-                    {Product.product_meta.map((meta) => (
-                        <Text key={meta.meta_id}>{meta.meta_key}:{meta.meta_value}</Text>
+                    {Product.product_meta.map((meta, index) => (
+                        <Text key={index}>{meta.meta_key}:{meta.meta_value}</Text>
                     ))}
                 </>
             )}
