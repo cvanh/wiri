@@ -15,5 +15,5 @@ final class Company extends Model
     public $incrementing = false;
     protected $table = 'companies';
 
-    protected $fillable = ['type', 'name', 'about', 'author_id'];
+    protected $fillable = ['type', 'longitude', 'latitude', 'name', 'about', 'author_id'];
 }

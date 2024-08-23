@@ -27,12 +27,16 @@ final class ProducerController extends Controller
             'name' => 'required|string',
             'type' => 'required|in:store,company',
             'about' => 'required|string',
+            'longitude' => 'required',
+            'latitude' => 'required',
         ]);
         $data = [
             'author_id' => Auth::user()->id,
             'name' => $request->name,
             'type' => $request->type,
             'about' => $request->about,
+            'longitude' => $request->longitude,
+            'latitude' => $request->latitude,
         ];
 
         Company::create($data);

@@ -18,6 +18,8 @@ final class ProducerCreateTest extends TestCase
             'name' => 'wietje',
             'type' => 'store',
             'about' => 'about',
+            'longitude' => '4.6503151',
+            'latitude' => '52.1362613'
         ];
 
         $response = $this->actingAs($user)->postJson('/api/company/create', $data);
@@ -38,6 +40,8 @@ final class ProducerCreateTest extends TestCase
             'name' => 'wietje',
             'type' => 'store',
             'about' => 'about',
+            'longitude' => '4.6503151',
+            'latitude' => '52.1362613'
         ];
 
         $response = $this->postJson('/api/company/create', $data);
