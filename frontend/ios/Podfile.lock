@@ -256,6 +256,15 @@ PODS:
   - hermes-engine (0.74.5):
     - hermes-engine/Pre-built (= 0.74.5)
   - hermes-engine/Pre-built (0.74.5)
+  - MapboxCommon (23.10.1)
+  - MapboxCoreMaps (10.18.0):
+    - MapboxCommon (~> 23.10)
+  - MapboxMaps (10.18.2):
+    - MapboxCommon (= 23.10.1)
+    - MapboxCoreMaps (= 10.18.0)
+    - MapboxMobileEvents (= 1.0.10)
+    - Turf (= 2.8.0)
+  - MapboxMobileEvents (1.0.10)
   - RCT-Folly (2024.01.01.00):
     - boost
     - DoubleConversion
@@ -1417,6 +1426,17 @@ PODS:
     - React-utils (= 0.74.5)
   - RNCAsyncStorage (1.23.1):
     - React-Core
+  - rnmapbox-maps (10.1.29):
+    - MapboxMaps (~> 10.18.2)
+    - React
+    - React-Core
+    - rnmapbox-maps/DynamicLibrary (= 10.1.29)
+    - Turf
+  - rnmapbox-maps/DynamicLibrary (10.1.29):
+    - MapboxMaps (~> 10.18.2)
+    - React
+    - React-Core
+    - Turf
   - RNScreens (3.31.1):
     - DoubleConversion
     - glog
@@ -1439,7 +1459,10 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
+  - RNSVG (15.6.0):
+    - React-Core
   - SocketRocket (0.7.0)
+  - Turf (2.8.0)
   - Yoga (0.0.0)
 
 DEPENDENCIES:
@@ -1515,12 +1538,19 @@ DEPENDENCIES:
   - React-utils (from `../node_modules/react-native/ReactCommon/react/utils`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
+  - "rnmapbox-maps (from `../node_modules/@rnmapbox/maps`)"
   - RNScreens (from `../node_modules/react-native-screens`)
+  - RNSVG (from `../node_modules/react-native-svg`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
   trunk:
+    - MapboxCommon
+    - MapboxCoreMaps
+    - MapboxMaps
+    - MapboxMobileEvents
     - SocketRocket
+    - Turf
 
 EXTERNAL SOURCES:
   boost:
@@ -1664,8 +1694,12 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-async-storage/async-storage"
+  rnmapbox-maps:
+    :path: "../node_modules/@rnmapbox/maps"
   RNScreens:
     :path: "../node_modules/react-native-screens"
+  RNSVG:
+    :path: "../node_modules/react-native-svg"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -1691,6 +1725,10 @@ SPEC CHECKSUMS:
   fmt: 4c2741a687cc09f0634a2e2c72a838b99f1ff120
   glog: fdfdfe5479092de0c4bdbebedd9056951f092c4f
   hermes-engine: 8c1577f3fdb849cbe7729c2e7b5abc4b845e88f8
+  MapboxCommon: 0ff437e44988da6856e280d00ffb266564ed0487
+  MapboxCoreMaps: f1bd9405f5b9d3e343f2fe4138775299699a22fb
+  MapboxMaps: e76b14f52c54c40b76ddecd04f40448e6f35a864
+  MapboxMobileEvents: de50b3a4de180dd129c326e09cd12c8adaaa46d6
   RCT-Folly: 02617c592a293bd6d418e0a88ff4ee1f88329b47
   RCTDeprecation: 3afceddffa65aee666dafd6f0116f1d975db1584
   RCTRequired: ec1239bc9d8bf63e10fb92bd8b26171a9258e0c1
@@ -1740,10 +1778,13 @@ SPEC CHECKSUMS:
   React-utils: f242eb7e7889419d979ca0e1c02ccc0ea6e43b29
   ReactCommon: f7da14a8827b72704169a48c929bcde802698361
   RNCAsyncStorage: 9fdd15bfacec112394e11e7091b1a19148d82cd7
+  rnmapbox-maps: 69a746941da5322f489052cc693a11bb1d12c9d6
   RNScreens: b32a9ff15bea7fcdbe5dff6477bc503f792b1208
+  RNSVG: 5da7a24f31968ec74f0b091e3440080f347e279b
   SocketRocket: abac6f5de4d4d62d24e11868d7a2f427e0ef940d
+  Turf: aa2ede4298009639d10db36aba1a7ebaad072a5e
   Yoga: 950bbfd7e6f04790fdb51149ed51df41f329fcc8
 
-PODFILE CHECKSUM: 32345b469c0d5ccdc12bda9c6057d92db8c46f03
+PODFILE CHECKSUM: 149ac4be72729f80850f1f8c6b1ab43dd3f7f360
 
 COCOAPODS: 1.15.2

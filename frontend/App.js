@@ -9,6 +9,7 @@ import CredentailsModel from "./src/lib/models/CredentailsModel";
 import ProductCreate from "./src/screens/product/ProductCreate";
 import ProductDetail from "./src/screens/product/ProductDetail";
 import CompanyDetail from "./src/screens/company/CompanyDetail";
+import MapScreen from "./src/screens/MapScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -37,6 +38,7 @@ function App() {
             <Stack.Screen name="ProductDetail" component={ProductDetail} />
 
             <Stack.Screen name="CompanyDetail" component={CompanyDetail} />
+            <Stack.Screen name="Map" component={MapScreen} />
           </>
         )}
       </Stack.Navigator>
