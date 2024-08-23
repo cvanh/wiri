@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import axiosInstance from '../../lib/axiosInterceptor';
+import ProductInterface from '../../lib/interfaces/ProductInterface';
 
 const ProductDetail = ({ route }) => {
-    const [Product, setProduct] = useState();
+    const [Product, setProduct] = useState<ProductInterface>();
     const { id } = route.params
     useEffect(() => {
         async function getProduct() {
@@ -12,7 +13,6 @@ const ProductDetail = ({ route }) => {
         }
         getProduct()
     }, []);
-    console.log("asd", Product)
     return (
         <View>
             {Product && (

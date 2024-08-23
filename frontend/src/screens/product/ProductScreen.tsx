@@ -1,9 +1,10 @@
-import { View, Text, StyleSheet, Image, Button, ScrollView, TouchableHighlight } from 'react-native'
-import React, { useContext, useEffect, useState } from 'react'
+import { View, Text, Button, ScrollView, TouchableHighlight } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import axiosInstance from '../../lib/axiosInterceptor';
+import ProductInterface from '../../lib/interfaces/ProductInterface';
 
-export default function ProductScreen({ navigator, navigation }) {
-    const [products, setproducts] = useState();
+export default function ProductScreen({ navigator, navigation }): any {
+    const [products, setproducts] = useState<ProductInterface[]>();
 
     useEffect(() => {
         async function getProducts() {
@@ -23,8 +24,8 @@ export default function ProductScreen({ navigator, navigation }) {
             <Text>ProductScreen</Text>
             <ScrollView>
                 {products?.map((product) => (
-                    <TouchableHighlight onPress={() => { navigation.navigate("ProductDetail", { id: product.id }) }}>
-                        <View className="m-2" key={product.id}>
+                    <TouchableHighlight key={product.id} onPress={() => { navigation.navigate("ProductDetail", { id: product.id }) }}>
+                        <View className="m-2" >
                             {/* <Image source={require('../../assets/placeholder.png')} /> */}
                             <Text>{product.name}</Text>
                             <Text>{product.description}</Text>
@@ -35,29 +36,3 @@ export default function ProductScreen({ navigator, navigation }) {
         </View>
     )
 }
-
-// const style = StyleSheet.create({
-//     image: {
-//         height: 100,
-//         width: 100,
-//         position: "absolute"
-//     },
-//     container: {
-//         flex: 1,
-//         justifyContent: "center",
-//         paddingTop: 10,
-//         backgroundColor: "#ecf0f1",
-//         padding: 8,
-//     },
-//     product: {
-//         // marginTop: 34,
-//         margin: 5,
-//         fontSize: 18,
-//         width: "50%",
-//         fontWeight: "bold",
-//     },
-//     productDescription: {
-//         fontSize: 12
-
-//     }
-// })
