@@ -52,6 +52,7 @@ function App() {
               component={HomeKaas}
             />
             <Stack.Screen name="ProductCreate" component={ProductCreate} />
+            <Stack.Screen name="Product" component={ProductScreen} />
             <Stack.Screen name="ProductDetail" component={ProductDetail} />
             <Stack.Screen name="CompanyDetail" component={CompanyDetail} />
             <Stack.Screen name="Map" component={MapScreen} />
