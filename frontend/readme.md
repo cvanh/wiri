@@ -3,3 +3,5 @@ the app is build in react native and uses axios for http requests and async stor
 
 ## setup
 the setup is just like any other react native app. The node version is defined with [nvm](https://github.com/nvm-sh/nvm). If you dont use nvm you can see the current version in `.nvmrc`
+
+copy the .env.example to .env and fill it with the api url
