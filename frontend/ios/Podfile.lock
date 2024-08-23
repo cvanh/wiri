@@ -1426,6 +1426,8 @@ PODS:
     - React-utils (= 0.74.5)
   - RNCAsyncStorage (1.23.1):
     - React-Core
+  - RNCPicker (2.7.5):
+    - React-Core
   - rnmapbox-maps (10.1.29):
     - MapboxMaps (~> 10.18.2)
     - React
@@ -1538,6 +1540,7 @@ DEPENDENCIES:
   - React-utils (from `../node_modules/react-native/ReactCommon/react/utils`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
+  - "RNCPicker (from `../node_modules/@react-native-picker/picker`)"
   - "rnmapbox-maps (from `../node_modules/@rnmapbox/maps`)"
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSVG (from `../node_modules/react-native-svg`)
@@ -1694,6 +1697,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-async-storage/async-storage"
+  RNCPicker:
+    :path: "../node_modules/@react-native-picker/picker"
   rnmapbox-maps:
     :path: "../node_modules/@rnmapbox/maps"
   RNScreens:
@@ -1778,6 +1783,7 @@ SPEC CHECKSUMS:
   React-utils: f242eb7e7889419d979ca0e1c02ccc0ea6e43b29
   ReactCommon: f7da14a8827b72704169a48c929bcde802698361
   RNCAsyncStorage: 9fdd15bfacec112394e11e7091b1a19148d82cd7
+  RNCPicker: 3e2c37a8328f368ce14da050cdc8231deb5fc9f9
   rnmapbox-maps: 69a746941da5322f489052cc693a11bb1d12c9d6
   RNScreens: b32a9ff15bea7fcdbe5dff6477bc503f792b1208
   RNSVG: 5da7a24f31968ec74f0b091e3440080f347e279b

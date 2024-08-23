@@ -1,10 +1,11 @@
 import { ErrorMessage, Formik } from 'formik'
-import React, { useState } from 'react'
+import React, { useMemo, useRef, useState } from 'react'
 import * as Yup from "yup";
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native'
+import { Button, Text, TextInput, View } from 'react-native'
 import axiosInstance from '../../lib/axiosInterceptor';
 
 import { styled } from 'nativewind';
+import { Picker } from '@react-native-picker/picker';
 const StyledTextInput = styled(TextInput)
 const StyledButton = styled(Button)
 
@@ -17,6 +18,17 @@ const ProductSchema = Yup.object().shape({
 
 export default function ProductCreate() {
     const [displayMessage, setDisplayMessage] = useState<String>();
+    const [Companies, setCompanies] = useState();
+    useMemo(() => {
+        async function GetCompanies() {
+            const res = await axiosInstance.get(`/api/company/`)
+            setCompanies(res.data)
+        }
+        GetCompanies()
+    }, [])
+
+
+
 
     const createProduct = async (values) => {
         const res = await axiosInstance.post("/api/product/create", {
@@ -61,13 +73,17 @@ export default function ProductCreate() {
                             value={values.description}
                         />
                         <ErrorMessage name="producer_id" />
-                        <StyledTextInput
-                            onChangeText={handleChange("producer_id")}
-                            placeholder="producer_id"
-                            onBlur={handleBlur("producer_id")}
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                            value={values.producer_id}
-                        />
+                        <Picker
+                            selectedValue={values.producer_id}
+                            onValueChange={handleChange("producer_id")}>
+                            {Companies && Companies.map((company) => (
+                                <Picker.Item
+                                    key={`${company.id}_${company.name}`}
+                                    value={company.id}
+                                    label={company.name}
+                                />
+                            ))}
+                        </Picker>
                         <StyledButton className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onPress={handleSubmit} title="Submit" />
                     </View>
                 )}
