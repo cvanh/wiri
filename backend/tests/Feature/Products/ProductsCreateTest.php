@@ -42,7 +42,6 @@ final class ProductsCreateTest extends TestCase
         ];
 
         $response = $this->actingAs($user)->postJson('/api/product/create', $reqBody);
-        $response->dump();
 
         $response->assertSuccessful();
 
