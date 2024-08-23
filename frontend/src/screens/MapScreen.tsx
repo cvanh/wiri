@@ -72,8 +72,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     container: {
-        height: 400,
-        width: 400,
+        flex: 1
     },
     map: {
         flex: 1
