@@ -11,7 +11,8 @@ const ProductSchema = Yup.object().shape({
 });
 
 export default function ProductCreate() {
-    const [displayMessage, setDisplayMessage] = useState();
+    const [displayMessage, setDisplayMessage] = useState<String>();
+
     const createProduct = async (values) => {
         const res = await axiosInstance.post("/api/product/create", {
             name: values.name,
@@ -22,7 +23,7 @@ export default function ProductCreate() {
             setDisplayMessage("success")
         }
         if (res.status != 201) {
-            setDisplayMessage("http error", res.status)
+            setDisplayMessage(`http error: ${res.status}`)
         }
 
     }
