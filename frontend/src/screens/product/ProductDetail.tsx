@@ -1,0 +1,35 @@
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import axiosInstance from '../../lib/axiosInterceptor';
+
+const ProductDetail = ({ route }) => {
+    const [Product, setProduct] = useState();
+    const { id } = route.params
+    useEffect(() => {
+        async function getProduct() {
+            const res = await axiosInstance.get(`/api/product/${id}`)
+            setProduct(res.data)
+        }
+        getProduct()
+    }, []);
+    console.log("asd", Product)
+    return (
+        <View>
+            {Product && (
+                <>
+                    <Text>{Product.name}</Text>
+                    <Text>{Product.description}</Text>
+                    <Text>{Product.deleted_at}</Text>
+                    <Text>{Product.created_at}</Text>
+                    {Product.product_meta.map((meta) => (
+                        <Text key={meta.meta_id}>{meta.meta_key}:{meta.meta_value}</Text>
+                    ))}
+                </>
+            )}
+
+        </View>
+    );
+}
+
+
+export default ProductDetail;

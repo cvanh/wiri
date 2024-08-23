@@ -7,6 +7,7 @@ import HomeScreen from "./src/screens/HomeScreen";
 import ProductScreen from "./src/screens/product/ProductScreen";
 import CredentailsModel from "./src/lib/models/CredentailsModel";
 import ProductCreate from "./src/screens/product/ProductCreate";
+import ProductDetail from "./src/screens/product/ProductDetail";
 
 const Stack = createNativeStackNavigator();
 
@@ -32,6 +33,7 @@ function App() {
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="Product" component={ProductScreen} />
             <Stack.Screen name="ProductCreate" component={ProductCreate} />
+            <Stack.Screen name="ProductDetail" component={ProductDetail} />
           </>
         )}
       </Stack.Navigator>
