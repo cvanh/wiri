@@ -4,6 +4,11 @@ import * as Yup from "yup";
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native'
 import axiosInstance from '../../lib/axiosInterceptor';
 
+import { styled } from 'nativewind';
+const StyledTextInput = styled(TextInput)
+const StyledButton = styled(Button)
+
+
 const ProductSchema = Yup.object().shape({
     name: Yup.string().required("Required"),
     description: Yup.string().required("Required"),
@@ -28,7 +33,7 @@ export default function ProductCreate() {
 
     }
     return (
-        <View style={style.container}>
+        <View className="bg-white" >
             {displayMessage && <Text>{displayMessage}</Text>}
             <Formik
                 onSubmit={values => createProduct(values)}
@@ -38,31 +43,32 @@ export default function ProductCreate() {
                 {({ handleChange, handleBlur, handleSubmit, values }) => (
                     <View>
                         <ErrorMessage name="name" />
-                        <TextInput
+                        <StyledTextInput
                             onChangeText={handleChange("name")}
-                            style={style.textInput}
                             placeholder="name"
                             onBlur={handleBlur("name")}
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                             value={values.name}
                         />
 
                         <ErrorMessage name="description" />
-                        <TextInput
+                        <StyledTextInput
                             onChangeText={handleChange("description")}
-                            style={style.textInput}
                             placeholder="description"
                             onBlur={handleBlur("description")}
+
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                             value={values.description}
                         />
                         <ErrorMessage name="producer_id" />
-                        <TextInput
+                        <StyledTextInput
                             onChangeText={handleChange("producer_id")}
-                            style={style.textInput}
                             placeholder="producer_id"
                             onBlur={handleBlur("producer_id")}
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                             value={values.producer_id}
                         />
-                        <Button onPress={handleSubmit} title="Submit" />
+                        <StyledButton className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onPress={handleSubmit} title="Submit" />
                     </View>
                 )}
             </Formik>
@@ -72,23 +78,23 @@ export default function ProductCreate() {
     )
 }
 
-const style = StyleSheet.create({
-    image: {
-        height: 100,
-        width: 100,
-        position: "absolute"
-    },
-    container: {
-        flex: 1,
-        justifyContent: "center",
-        paddingTop: 10,
-        backgroundColor: "#ecf0f1",
-        padding: 8,
-    },
-    textInput: {
-        height: 35,
-        borderColor: "gray",
-        borderWidth: 0.5,
-        padding: 4,
-    },
-})
+// const style = StyleSheet.create({
+//     image: {
+//         height: 100,
+//         width: 100,
+//         position: "absolute"
+//     },
+//     container: {
+//         flex: 1,
+//         justifyContent: "center",
+//         paddingTop: 10,
+//         backgroundColor: "#ecf0f1",
+//         padding: 8,
+//     },
+//     textInput: {
+//         height: 35,
+//         borderColor: "gray",
+//         borderWidth: 0.5,
+//         padding: 4,
+//     },
+// })
