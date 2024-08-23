@@ -1,5 +1,5 @@
 import Mapbox, { Image } from '@rnmapbox/maps';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import axiosInstance from '../lib/axiosInterceptor';
 
@@ -15,7 +15,7 @@ const corners = [
 
 const MapScreen = ({ navigation }) => {
     const [Companies, setCompanies] = useState();
-    useEffect(() => {
+    useMemo(() => {
         async function GetCompanies() {
             const res = await axiosInstance.get(`/api/company/`)
             const list = res.data.map((company) => {
@@ -26,6 +26,7 @@ const MapScreen = ({ navigation }) => {
                     anchor: { x: 1 / 3, y: 0 },
                 }
             })
+            console.info("recalculate companies")
             setCompanies(list)
         }
         GetCompanies()
