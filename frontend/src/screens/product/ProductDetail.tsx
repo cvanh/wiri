@@ -33,5 +33,26 @@ const ProductDetail = ({ route, navigation }) => {
     );
 }
 
+// const style = StyleSheet.create({
+//     image: {
+//         height: 100,
+//         width: 100,
+//         position: "absolute"
+//     },
+//     container: {
+//         flex: 1,
+//         justifyContent: "center",
+//         paddingTop: 10,
+//         backgroundColor: "#ecf0f1",
+//         padding: 8,
+//     },
+//     textInput: {
+//         height: 35,
+//         borderColor: "gray",
+//         borderWidth: 0.5,
+//         padding: 4,
+//     },
+// })
+
 
 export default ProductDetail;
