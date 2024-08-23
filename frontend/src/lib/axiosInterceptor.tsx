@@ -11,7 +11,10 @@ axiosInstance.interceptors.request.use(
     async (config) => {
         // TODO make shure this only is set on the requests to the api
         const credentials = await CredentailsModel.get()
-        config.headers.Authorization = `Bearer ${credentials.token}`
+        if (credentials) {
+            config.headers.Authorization = `Bearer ${credentials.token}`
+        }
+
         return config
     },
 
