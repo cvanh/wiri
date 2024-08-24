@@ -20,7 +20,8 @@ class ReviewsFactory extends Factory
         return [
             'author_id' => User::all()->random()->id,
             'content' => fake()->paragraph(),
-            'approved' => fake()->boolean()
+            'approved' => fake()->boolean(),
+            'rating' => fake()->numberBetween(1, 100)
         ];
     }
 }

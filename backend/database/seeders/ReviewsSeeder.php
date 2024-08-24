@@ -14,13 +14,13 @@ class ReviewsSeeder extends Seeder
      */
     public function run(): void
     {
-        Product::all()->take(10)->each(function (Product $product) {
-            $reviews = Reviews::factory()->count(10);
+        Product::all()->each(function ($product) {
+            $reviews = Reviews::factory()->count(1)->make();
             $product->reviews()->saveMany($reviews);
         });
 
-        Company::all()->take(10)->each(function (Company $company) {
-            $reviews = Reviews::factory()->count(10);
+        Company::all()->each(function ($company) {
+            $reviews = Reviews::factory()->count(1)->make();
             $company->reviews()->saveMany($reviews);
         });
     }

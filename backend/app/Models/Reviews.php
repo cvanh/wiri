@@ -10,10 +10,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Reviews extends Model
 {
-    use HasFactory, HasUuids, SoftDeletes;
-    protected $primaryKey = 'id';
+    use HasFactory;
+    use SoftDeletes;
+    use HasUuids;
+
+    protected $primaryKey = 'review_id';
     public $incrementing = false;
+
     protected $table = 'reviews';
+
     protected $fillable = ['content'];
 
     public function review(): MorphTo
