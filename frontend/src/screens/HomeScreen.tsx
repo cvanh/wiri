@@ -3,29 +3,32 @@ import SButton from "../components/SButton";
 
 function HomeScreen({ navigation }) {
   return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <Text>Home Screen</Text>
+    <View>
+      <Text style={style.title}>Gekozen voor jouw</Text>
 
-      <SButton onPress={() => navigation.navigate("Login")} title="login" />
-      <SButton onPress={() => navigation.navigate("Product")} title="product" />
-      <SButton onPress={() => navigation.navigate("Map")} title="map" />
+      <Text style={style.title}>In de buurt</Text>
+
+      {/* <View style={style.recomended}>
+        <SButton onPress={() => navigation.navigate("Login")} title="login" />
+        <SButton onPress={() => navigation.navigate("Product")} title="product" />
+        <SButton onPress={() => navigation.navigate("Map")} title="map" />
+      </View> */}
+
+
+
     </View >
   );
 }
 
 const style = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
+  title: {
+    fontSize: 30,
+    margin: 4,
+  },
+  recomended: {
+    flexDirection: "row",
     paddingTop: 10,
-    backgroundColor: "#ecf0f1",
-    padding: 8,
+    justifyContent: "center",
   },
 })
 
