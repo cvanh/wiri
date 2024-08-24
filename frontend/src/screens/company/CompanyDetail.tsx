@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
 import axiosInstance from '../../lib/axiosInterceptor';
 
-const CompanyDetail = ({ route }: Props) => {
+const CompanyDetail = ({ route }) => {
     const [Company, setCompany] = useState()
     const { id } = route.params
 
