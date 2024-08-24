@@ -13,6 +13,7 @@ import CompanyDetail from "./src/screens/company/CompanyDetail";
 import MapScreen from "./src/screens/MapScreen";
 import ProfileScreen from "./src/screens/ProfileScreen";
 import SearchScreen from "./src/screens/SearchScreen";
+import axiosInstance from "./src/lib/axiosInterceptor";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -22,8 +23,8 @@ function App() {
 
   useEffect(() => {
     async function getData() {
-      const data = await CredentailsModel.get();
-      setloggedIn(data);
+      const res = await axiosInstance.get("/api/user");
+      setloggedIn(res.data);
     }
     getData();
   }, []);

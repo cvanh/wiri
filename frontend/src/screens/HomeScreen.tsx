@@ -8,11 +8,11 @@ function HomeScreen({ navigation }) {
 
       <Text style={style.title}>In de buurt</Text>
 
-      {/* <View style={style.recomended}>
+      <View style={style.recomended}>
         <SButton onPress={() => navigation.navigate("Login")} title="login" />
         <SButton onPress={() => navigation.navigate("Product")} title="product" />
         <SButton onPress={() => navigation.navigate("Map")} title="map" />
-      </View> */}
+      </View>
 
 
 

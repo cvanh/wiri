@@ -1,5 +1,8 @@
-<?php declare(strict_types=1);
+<?php
 
+declare(strict_types=1);
+
+use App\Http\Controllers\AppController;
 use App\Http\Controllers\ProducerController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
@@ -20,4 +23,6 @@ Route::middleware('auth:sanctum')->name('api.')->group(static function () {
     Route::post('/product/create', [ProductController::class, 'store'])->middleware('auth');
     Route::post('/product/{id}', [ProductController::class, 'update'])->middleware('auth');
     Route::delete('/product/{id}', [ProductController::class, 'destroy'])->middleware('auth');
+
+    Route::get('/app/search/', [AppController::class, 'search'])->middleware('auth');
 });
