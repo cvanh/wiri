@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('reviews', function (Blueprint $table) {
             $table->uuid('review_id')->primary();
             $table->string('review_type');
+            $table->integer('rating');
             $table->foreignIdFor(User::class, 'author_id');
             $table->string("content");
             $table->boolean("approved");
