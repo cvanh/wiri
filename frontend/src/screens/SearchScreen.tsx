@@ -15,7 +15,7 @@ export default function SearchScreen() {
         setResults(res.data)
     }
 
-    const debounceFn = useCallback(_.debounce(handleDebounceFn, 100), [Query]);
+    const debounceFn = useCallback(_.debounce(handleDebounceFn, 1000), [Query]);
 
     function handleChange(value: string) {
         setQuery(value);
