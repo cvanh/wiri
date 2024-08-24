@@ -14,6 +14,7 @@ class ReviewsSeeder extends Seeder
      */
     public function run(): void
     {
+        //TODO this can only create 1 review before fucking up
         Product::all()->each(function ($product) {
             $reviews = Reviews::factory()->count(1)->make();
             $product->reviews()->saveMany($reviews);
