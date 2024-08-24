@@ -1,5 +1,6 @@
-import { View, Text, Button, StyleSheet, Pressable } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import SButton from "../components/SButton";
+import React from "react";
 
 function HomeScreen({ navigation }) {
   return (

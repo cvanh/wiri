@@ -6,7 +6,7 @@ import axiosInstance from '../lib/axiosInterceptor';
 import SearchResultsInterface from '../lib/interfaces/SearchResultsInterface';
 
 export default function SearchScreen() {
-    const [Query, setQuery] = useState<String>();
+    const [Query, setQuery] = useState<string>();
     const [Results, setResults] = useState<SearchResultsInterface>();
 
     async function handleDebounceFn(query: string) {

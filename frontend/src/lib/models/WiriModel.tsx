@@ -1,7 +1,5 @@
 import axiosInstance from "../axiosInterceptor";
-import CredentailsInterface from "../interfaces/CredentailsInterface";
 import UserInterface from "../interfaces/UserInterface";
-import CredentailsModel from "./CredentailsModel";
 
 class ApiModel {
     static async getCurrentUser(): Promise<UserInterface> {

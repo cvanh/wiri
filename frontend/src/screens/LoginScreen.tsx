@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import React from "react";
+import { Button, StyleSheet, TextInput, View } from "react-native";
 import CredentialsModel from "../lib/models/CredentailsModel"
 
 import * as Yup from "yup";

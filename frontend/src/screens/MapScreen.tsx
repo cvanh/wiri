@@ -1,17 +1,10 @@
-import Mapbox, { Image } from '@rnmapbox/maps';
-import React, { useEffect, useMemo, useState } from 'react';
-import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import Mapbox from '@rnmapbox/maps';
+import React, { useMemo, useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 import axiosInstance from '../lib/axiosInterceptor';
 
 Mapbox.setAccessToken(process.env.EXPO_PUBLIC_MAPBOX_PUBLIC_KEY);
 const ANNOTATION_SIZE = 50;
-
-const corners = [
-    {
-        coordinate: [4.6503151, 52.1362613],
-        anchor: { x: 1 / 3, y: 0 },
-    },
-];
 
 const MapScreen = ({ navigation }) => {
     const [Companies, setCompanies] = useState();
@@ -48,7 +41,7 @@ const MapScreen = ({ navigation }) => {
                     >
                         <View style={styles.small}>
                             <Text style={[styles.text]}>
-                                {p.name} 
+                                {p.name}
                             </Text>
                         </View>
                     </Mapbox.PointAnnotation>

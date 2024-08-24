@@ -1,6 +1,11 @@
+import React from "react";
 import { Pressable, StyleSheet, Text } from "react-native";
 
-export default function SButton(props) {
+interface Props extends React.ComponentProps<typeof Pressable> {
+  title: string;
+}
+
+export default function SButton(props: Props) {
   return (
     <Pressable style={style.button} {...props}>
       <Text style={style.text}>{props?.title}</Text>

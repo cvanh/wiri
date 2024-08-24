@@ -8,8 +8,8 @@
     "web": "expo start --web",
     "test": "jest",
     "lint": "eslint .",
-    "lintFixAll": "eslint 'src/**/*.{js,jsx}'",
-    "prettierFixAll": "prettier --write 'src/**/*.{js,jsx}'",
+    "lintFixAll": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
+    "prettierFixAll": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
     "fix:lintPrettier": "yarn prettierFixAll && yarn lintFixAll"
   },
   "dependencies": {
