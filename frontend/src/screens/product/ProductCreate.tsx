@@ -1,11 +1,13 @@
 import { ErrorMessage, Formik } from 'formik'
 import React, { useMemo, useState } from 'react'
 import * as Yup from "yup";
-import { Button, Text, TextInput, View } from 'react-native'
+import { Button, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
 import axiosInstance from '../../lib/axiosInterceptor';
 
 import { styled } from 'nativewind';
 import { Picker } from '@react-native-picker/picker';
+import LocationPicker from '../../components/LocationPicker';
+import SButton from '../../components/SButton';
 const StyledTextInput = styled(TextInput)
 const StyledButton = styled(Button)
 
@@ -13,7 +15,8 @@ const StyledButton = styled(Button)
 const ProductSchema = Yup.object().shape({
     name: Yup.string().required("Required"),
     description: Yup.string().required("Required"),
-    producer_id: Yup.string().required()
+    producer_id: Yup.string().required(),
+    location: Yup.array(Yup.number())
 });
 
 export default function ProductCreate() {
@@ -27,14 +30,14 @@ export default function ProductCreate() {
         GetCompanies()
     }, [])
 
-
-
-
     const createProduct = async (values) => {
+        console.info("creating product:", values)
         const res = await axiosInstance.post("/api/product/create", {
             name: values.name,
             description: values.description,
-            producer_id: values.producer_id
+            producer_id: values.producer_id,
+            longitude: values.location[0],
+            latidude: values.location[1]
         })
         if (res.status == 201) {
             setDisplayMessage("success")
@@ -45,31 +48,31 @@ export default function ProductCreate() {
 
     }
     return (
-        <View className="bg-white" >
+        <ScrollView>
             {displayMessage && <Text>{displayMessage}</Text>}
             <Formik
                 onSubmit={values => createProduct(values)}
                 validationSchema={ProductSchema}
-                initialValues={{ name: "", description: "", producer_id: "6c9efd63-4036-3f8c-80cb-221213fcee9b" }}
+                initialValues={{ name: "", description: "", producer_id: "", location: null }}
             >
-                {({ handleChange, handleBlur, handleSubmit, values }) => (
+                {({ setFieldValue, handleChange, handleBlur, handleSubmit, values }) => (
                     <View>
                         <ErrorMessage name="name" />
-                        <StyledTextInput
+                        <TextInput
                             onChangeText={handleChange("name")}
                             placeholder="name"
                             onBlur={handleBlur("name")}
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                             value={values.name}
+                            style={style.textInput}
                         />
 
                         <ErrorMessage name="description" />
-                        <StyledTextInput
+                        <TextInput
                             onChangeText={handleChange("description")}
                             placeholder="description"
                             onBlur={handleBlur("description")}
+                            style={style.textInput}
 
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                             value={values.description}
                         />
                         <ErrorMessage name="producer_id" />
@@ -84,33 +87,33 @@ export default function ProductCreate() {
                                 />
                             ))}
                         </Picker>
-                        <StyledButton className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onPress={handleSubmit} title="Submit" />
+
+                        <Text>select the location</Text>
+                        <ErrorMessage name="location" />
+                        <LocationPicker
+                            value={values.location}
+                            setFieldValue={setFieldValue}
+
+                        />
+                        <SButton onPress={handleSubmit} title="Submit" />
                     </View>
                 )}
             </Formik>
 
 
-        </View>
+        </ScrollView>
     )
 }
 
-// const style = StyleSheet.create({
-//     image: {
-//         height: 100,
-//         width: 100,
-//         position: "absolute"
-//     },
-//     container: {
-//         flex: 1,
-//         justifyContent: "center",
-//         paddingTop: 10,
-//         backgroundColor: "#ecf0f1",
-//         padding: 8,
-//     },
-//     textInput: {
-//         height: 35,
-//         borderColor: "gray",
-//         borderWidth: 0.5,
-//         padding: 4,
-//     },
-// })
+const style = StyleSheet.create({
+    textInput: {
+        height: 35,
+        borderColor: "gray",
+        borderWidth: 0.5,
+        padding: 4,
+    },
+    label: {
+        fontSize: 20,
+        margin: 4
+    }
+})
