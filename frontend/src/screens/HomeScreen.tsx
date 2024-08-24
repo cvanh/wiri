@@ -13,6 +13,7 @@ function HomeScreen({ navigation }) {
         <SButton onPress={() => navigation.navigate("Login")} title="login" />
         <SButton onPress={() => navigation.navigate("Product")} title="product" />
         <SButton onPress={() => navigation.navigate("Map")} title="map" />
+        <SButton onPress={() => navigation.navigate("CompanyCreate")} title="add company" />
       </View>
 
 

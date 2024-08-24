@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
@@ -25,7 +27,7 @@ final class ProducerController extends Controller
     {
         $request->validate([
             'name' => 'required|string',
-            'type' => 'required|in:store,company',
+            'type' => 'required|in:store,producer',
             'about' => 'required|string',
             'longitude' => 'required',
             'latitude' => 'required',
@@ -57,15 +59,11 @@ final class ProducerController extends Controller
      * Update the specified resource in storage.
      * @authenticated
      */
-    public function update(Request $request, string $id)
-    {
-    }
+    public function update(Request $request, string $id) {}
 
     /**
      * Remove the specified resource from storage.
      * @authenticated
      */
-    public function destroy(string $id)
-    {
-    }
+    public function destroy(string $id) {}
 }

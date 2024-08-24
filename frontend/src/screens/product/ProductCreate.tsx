@@ -5,14 +5,12 @@ import { ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
 import axiosInstance from '../../lib/axiosInterceptor';
 
 import { Picker } from '@react-native-picker/picker';
-import LocationPicker from '../../components/LocationPicker';
 import SButton from '../../components/SButton';
 
 const ProductSchema = Yup.object().shape({
     name: Yup.string().required("Required"),
     description: Yup.string().required("Required"),
     producer_id: Yup.string().required(),
-    location: Yup.array(Yup.number())
 });
 
 export default function ProductCreate() {
@@ -32,8 +30,6 @@ export default function ProductCreate() {
             name: values.name,
             description: values.description,
             producer_id: values.producer_id,
-            longitude: values.location[0],
-            latidude: values.location[1]
         })
         if (res.status == 201) {
             setDisplayMessage("success")
@@ -49,9 +45,9 @@ export default function ProductCreate() {
             <Formik
                 onSubmit={values => createProduct(values)}
                 validationSchema={ProductSchema}
-                initialValues={{ name: "", description: "", producer_id: "", location: null }}
+                initialValues={{ name: "", description: "", producer_id: "" }}
             >
-                {({ setFieldValue, handleChange, handleBlur, handleSubmit, values }) => (
+                {({ handleChange, handleBlur, handleSubmit, values }) => (
                     <View>
                         <ErrorMessage name="name" />
                         <TextInput
@@ -83,14 +79,6 @@ export default function ProductCreate() {
                                 />
                             ))}
                         </Picker>
-
-                        <Text>select the location</Text>
-                        <ErrorMessage name="location" />
-                        <LocationPicker
-                            value={values.location}
-                            setFieldValue={setFieldValue}
-
-                        />
                         <SButton onPress={handleSubmit} title="Submit" />
                     </View>
                 )}

@@ -1,19 +1,20 @@
-import * as React from "react";
-import { useEffect, useState } from "react";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import LoginScreen from "./src/screens/LoginScreen";
-import HomeScreen from "./src/screens/HomeScreen";
-import ProductScreen from "./src/screens/product/ProductScreen";
-import CredentailsModel from "./src/lib/models/CredentailsModel";
-import ProductCreate from "./src/screens/product/ProductCreate";
-import ProductDetail from "./src/screens/product/ProductDetail";
-import CompanyDetail from "./src/screens/company/CompanyDetail";
-import MapScreen from "./src/screens/MapScreen";
-import ProfileScreen from "./src/screens/ProfileScreen";
-import SearchScreen from "./src/screens/SearchScreen";
-import axiosInstance from "./src/lib/axiosInterceptor";
+import * as React from 'react';
+import { useEffect, useState } from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import LoginScreen from './src/screens/LoginScreen';
+import HomeScreen from './src/screens/HomeScreen';
+import ProductScreen from './src/screens/product/ProductScreen';
+import CredentailsModel from './src/lib/models/CredentailsModel';
+import ProductCreate from './src/screens/product/ProductCreate';
+import ProductDetail from './src/screens/product/ProductDetail';
+import CompanyDetail from './src/screens/company/CompanyDetail';
+import MapScreen from './src/screens/MapScreen';
+import ProfileScreen from './src/screens/ProfileScreen';
+import SearchScreen from './src/screens/SearchScreen';
+import axiosInstance from './src/lib/axiosInterceptor';
+import CompanyCreate from './src/screens/company/CompanyCreate';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -23,7 +24,7 @@ function App() {
 
   useEffect(() => {
     async function getData() {
-      const res = await axiosInstance.get("/api/user");
+      const res = await axiosInstance.get('/api/user');
       setloggedIn(res.data);
     }
     getData();
@@ -47,15 +48,12 @@ function App() {
           <Stack.Screen name="Login" component={LoginScreen} />
         ) : (
           <>
-            <Stack.Screen
-              name="App"
-              options={{ headerShown: false }}
-              component={HomeKaas}
-            />
+            <Stack.Screen name="App" options={{ headerShown: false }} component={HomeKaas} />
             <Stack.Screen name="ProductCreate" component={ProductCreate} />
             <Stack.Screen name="Product" component={ProductScreen} />
             <Stack.Screen name="ProductDetail" component={ProductDetail} />
             <Stack.Screen name="CompanyDetail" component={CompanyDetail} />
+            <Stack.Screen name="CompanyCreate" component={CompanyCreate} />
             <Stack.Screen name="Map" component={MapScreen} />
           </>
         )}
