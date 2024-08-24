@@ -56,6 +56,8 @@ erDiagram
         uuid author_id 
         str content
         bool approved
+        review_id - integer
+        review_type - string
     }
 
     USER||--o{PRODUCERS : "is"

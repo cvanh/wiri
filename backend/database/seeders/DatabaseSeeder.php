@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Database\Seeders;
 
@@ -16,6 +18,7 @@ final class DatabaseSeeder extends Seeder
             ProducerSeeder::class,
             ProductSeeder::class,
             UserSeeder::class,
+            ReviewsSeeder::class
         ]);
     }
 }

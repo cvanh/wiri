@@ -47,7 +47,7 @@ final class ProductController extends Controller
      */
     public function show($id)
     {
-        return Product::with('productMeta')->find($id);
+        return Product::with(['productMeta', 'reviews'])->find($id);
     }
 
     /**
