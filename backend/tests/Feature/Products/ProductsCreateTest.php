@@ -46,9 +46,9 @@ final class ProductsCreateTest extends TestCase
         $response->assertSuccessful();
 
         $this->assertDatabaseHas('products', [
-            "name" => $reqBody["name"],
-            "description" => $reqBody["description"],
-            "producer_id" => $reqBody["producer_id"]
+            'name' => $reqBody['name'],
+            'description' => $reqBody['description'],
+            'producer_id' => $reqBody['producer_id'],
         ]);
         $this->assertDatabaseHas('product_meta', [$reqBody['meta']]);
     }

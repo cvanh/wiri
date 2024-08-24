@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('companies', function (Blueprint $table) {
+        Schema::table('companies', static function (Blueprint $table) {
             $table->decimal('latitude', 10, 8);
             $table->decimal('longitude', 11, 8);
         });
@@ -22,7 +22,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('companies', function (Blueprint $table) {
+        Schema::table('companies', static function (Blueprint $table) {
             $table->dropColumn('latitude');
             $table->dropColumn('longitude');
         });

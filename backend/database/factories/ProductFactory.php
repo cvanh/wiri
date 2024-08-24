@@ -24,8 +24,8 @@ final class ProductFactory extends Factory
 
     public function producer($id): static
     {
-        return $this->state(fn (array $attributes) => [
-            "producer_id" => $id
+        return $this->state(static fn (array $attributes) => [
+            'producer_id' => $id,
         ]);
     }
 }

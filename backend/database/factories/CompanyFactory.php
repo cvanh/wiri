@@ -24,7 +24,7 @@ final class CompanyFactory extends Factory
             'name' => fake()->name(),
             'about' => fake()->paragraph(),
             'latitude' => fake()->latitude(51, 53),
-            'longitude' => fake()->longitude(4, 7)
+            'longitude' => fake()->longitude(4, 7),
         ];
     }
 }

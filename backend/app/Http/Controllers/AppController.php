@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
@@ -7,14 +7,13 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 
 // routes used in the mobile app
-class AppController extends Controller
+final class AppController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
     }
 
     /**
@@ -22,9 +21,9 @@ class AppController extends Controller
      */
     public function search(Request $req)
     {
-        $s = $req->query("s");
-        $companies = Company::where("name", "like", "%{$s}%")->get();
-        $products = Product::where("name", "like", "%{$s}%")->get();
+        $s = $req->query('s');
+        $companies = Company::where('name', 'like', "%{$s}%")->get();
+        $products = Product::where('name', 'like', "%{$s}%")->get();
         return ['search_key' => $s, 'companies' => $companies, 'products' => $products];
     }
 }

@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 use App\Models\Company;
 use App\Models\Product;
@@ -20,7 +18,7 @@ final class SearchTest extends TestCase
 
         $to_search = $company->first()->name;
 
-        $response = $this->actingAs($user)->get("/api/app/search?s={$to_search}",);
+        $response = $this->actingAs($user)->get("/api/app/search?s={$to_search}");
 
         $response->assertSuccessful();
         $response->assertJsonFragment(['name' => $to_search]);
@@ -39,7 +37,7 @@ final class SearchTest extends TestCase
                 ],
             ],
             'products' => [],
-            'search_key'
+            'search_key',
         ]);
     }
 
@@ -51,7 +49,7 @@ final class SearchTest extends TestCase
 
         $to_search = $product->first()->name;
 
-        $response = $this->actingAs($user)->get("/api/app/search?s={$to_search}",);
+        $response = $this->actingAs($user)->get("/api/app/search?s={$to_search}");
 
         $response->assertSuccessful();
         $response->dump();
@@ -65,7 +63,7 @@ final class SearchTest extends TestCase
                 'created_at',
                 'producer_id',
             ]],
-            'search_key'
+            'search_key',
         ]);
     }
 }
