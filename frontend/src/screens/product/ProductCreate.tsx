@@ -1,16 +1,12 @@
 import { ErrorMessage, Formik } from 'formik'
 import React, { useMemo, useState } from 'react'
 import * as Yup from "yup";
-import { Button, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
+import { ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
 import axiosInstance from '../../lib/axiosInterceptor';
 
-import { styled } from 'nativewind';
 import { Picker } from '@react-native-picker/picker';
 import LocationPicker from '../../components/LocationPicker';
 import SButton from '../../components/SButton';
-const StyledTextInput = styled(TextInput)
-const StyledButton = styled(Button)
-
 
 const ProductSchema = Yup.object().shape({
     name: Yup.string().required("Required"),
