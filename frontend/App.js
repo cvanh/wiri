@@ -55,7 +55,7 @@ function App() {
             <Stack.Screen name="CompanyDetail" component={CompanyDetail} />
             <Stack.Screen name="CompanyCreate" component={CompanyCreate} />
             <Stack.Screen name="Map" component={MapScreen} />
-            <Stack.Screen name="Login" component={LoginScreen} />
+            {/* <Stack.Screen name="Login" component={LoginScreen} /> */}
           </>
         )}
       </Stack.Navigator>

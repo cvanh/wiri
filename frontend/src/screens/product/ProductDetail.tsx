@@ -13,6 +13,7 @@ const ProductDetail = ({ route, navigation }) => {
         }
         getProduct()
     }, []);
+
     return (
         <View>
             {Product && (
@@ -28,6 +29,13 @@ const ProductDetail = ({ route, navigation }) => {
                     ))}
                 </>
             )}
+
+            <Text>reviewss:</Text>
+            {Product?.reviews && Product.reviews.map((review) => (
+                <>
+                    <Text>someone says:{review.content}</Text>
+                </>
+            ))}
 
         </View>
     );

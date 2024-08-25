@@ -1,3 +1,5 @@
+import ReviewInterface from './ReviewInterface';
+
 interface ProductInterface {
   created_at: string;
   deleted_at: string;
@@ -11,6 +13,7 @@ interface ProductInterface {
     meta_key: string;
     meta_value: string;
   }[];
+  reviews: ReviewInterface[];
 }
 
 export default ProductInterface;
