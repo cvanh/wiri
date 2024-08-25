@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 use App\Models\Company;
 use App\Models\Product;
@@ -22,23 +24,6 @@ final class SearchTest extends TestCase
 
         $response->assertSuccessful();
         $response->assertJsonFragment(['name' => $to_search]);
-        $response->assertJsonStructure([
-            'companies' => [
-                [
-                    'id',
-                    'type',
-                    'name',
-                    'about',
-                    'updated_at',
-                    'created_at',
-                    'author_id',
-                    'latitude',
-                    'longitude',
-                ],
-            ],
-            'products' => [],
-            'search_key',
-        ]);
     }
 
     public function test_user_can_search_product(): void
@@ -52,10 +37,33 @@ final class SearchTest extends TestCase
         $response = $this->actingAs($user)->get("/api/app/search?s={$to_search}");
 
         $response->assertSuccessful();
-        $response->dump();
         $response->assertJsonFragment(['name' => $to_search]);
+    }
+
+    public function test_search_json_structure(): void
+    {
+        $user = User::factory()->create();
+        Product::factory()->hasProductMeta(10)->create();
+        Company::factory()->createMany(10);
+
+        // look up everything so we can test the product and company structure
+        $response = $this->actingAs($user)->get("/api/app/search?s=");
+
+        $response->assertSuccessful();
         $response->assertJsonStructure([
-            'companies' => [],
+            'companies' => [
+                [
+                    'id',
+                    'type',
+                    'name',
+                    'about',
+                    'updated_at',
+                    'created_at',
+                    'author_id',
+                    'latitude',
+                    'longitude',
+                ]
+            ],
             'products' => [[
                 'id',
                 'name',
@@ -65,5 +73,12 @@ final class SearchTest extends TestCase
             ]],
             'search_key',
         ]);
+    }
+
+    public function test_unauthenticated_user_cant_search(): void
+    {
+        $response = $this->get("/api/app/search?s=asd");
+
+        $response->assertRedirectToRoute("login");
     }
 }
