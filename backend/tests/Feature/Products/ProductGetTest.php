@@ -65,29 +65,4 @@ final class ProductGetTest extends TestCase
             ],
         ]);
     }
-    public function test_get_product_reviews(): void
-    {
-        $user = User::factory()->create();
-        $product = Product::factory()->hasProductMeta(3)->hasReviews(1)->create();
-
-
-        $response = $this->actingAs($user)->get("/api/product/{$product->getAttribute('id')}");
-
-        $response->assertStatus(200);
-        $response->assertJsonCount(1, 'reviews');
-        $response->assertJsonStructure([
-            'reviews' => [
-                '*' => [
-                    'review_id',
-                    'review_type',
-                    'rating',
-                    'author_id',
-                    'content',
-                    'approved',
-                    'created_at',
-                    'updated_at',
-                ],
-            ],
-        ]);
-    }
 }

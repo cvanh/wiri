@@ -2,14 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { Button, Text, View } from 'react-native';
 import axiosInstance from '../../lib/axiosInterceptor';
 import ProductInterface from '../../lib/interfaces/ProductInterface';
+import ReviewInterface from '../../lib/interfaces/ReviewInterface';
 
 const ProductDetail = ({ route, navigation }) => {
-    const [Product, setProduct] = useState<ProductInterface>();
+    const [Product, setProduct] = useState<ProductInterface, ReviewInterface>();
     const { id } = route.params
     useEffect(() => {
         async function getProduct() {
-            const res = await axiosInstance.get(`/api/product/${id}`)
-            setProduct(res.data)
+            const ProductRes = await axiosInstance.get(`/api/product/${id}`)
+            const ReviewsRes = await axiosInstance.get(`/api/product/${id}/comments`)
+            setProduct({ ...ProductRes.data, ...ReviewsRes.data })
         }
         getProduct()
     }, []);
