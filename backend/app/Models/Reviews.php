@@ -19,7 +19,7 @@ class Reviews extends Model
 
     protected $table = 'reviews';
 
-    protected $fillable = ['content'];
+    protected $fillable = ['content', 'rating', 'author_id'];
 
     public function review(): MorphTo
     {

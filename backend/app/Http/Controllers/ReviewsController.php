@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Reviews;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Support\Facades\Auth;
 
 class ReviewsController extends Controller
 {
@@ -26,10 +29,23 @@ class ReviewsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, $model, $model_id)
+    public function store(Request $request)
     {
-        //
+        $request->validate([
+            'content' => 'required|string',
+            'rating' => 'required|integer'
+        ]);
 
+        $data = [
+            'content' => $request->content,
+            'rating' => $request->rating,
+            'author_id' => Auth::user()->id,
+        ];
+
+        $parent_model = $this->model::where('id', $request->model_id)->first();
+        $parent_model->reviews()->create($data);
+
+        return response(status: 201);
     }
 
     /**

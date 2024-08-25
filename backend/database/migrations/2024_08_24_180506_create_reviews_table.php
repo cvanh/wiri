@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('rating');
             $table->foreignIdFor(User::class, 'author_id');
             $table->string("content");
-            $table->boolean("approved");
+            $table->boolean("approved")->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

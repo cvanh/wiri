@@ -33,7 +33,7 @@ class ReviewCreateTest extends TestCase
 
         $response = $this->actingAs($this->user)->postJson("/api/product/{$product->id}/comment/create", $data);
 
-        $response->assertStatus(200);
+        $response->assertCreated();
         $this->assertDatabaseHas('reviews', $data);
     }
 
@@ -48,8 +48,21 @@ class ReviewCreateTest extends TestCase
         ];
 
         $response = $this->actingAs($this->user)->postJson("/api/company/{$company->id}/comment/create", $data);
-
-        $response->assertStatus(200);
+        $response->assertCreated();
         $this->assertDatabaseHas('reviews', $data);
+    }
+    /**@test */
+    public function test_unauthorized_create_review(): void
+    {
+        $company = Company::factory()->create();
+
+        $data = [
+            'content' => 'contentt',
+            'rating' => 50,
+        ];
+
+        $response = $this->postJson("/api/company/{$company->id}/comment/create", $data);
+
+        $response->assertUnauthorized();
     }
 }
