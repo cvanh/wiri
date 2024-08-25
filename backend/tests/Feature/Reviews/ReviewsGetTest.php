@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 /**
  * ReviewsGetTest
- * @group Comments
+ * @group Reviews 
  */
 class ReviewsGetTest extends TestCase
 {

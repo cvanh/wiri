@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Illuminate\Support\Facades\Gate;
 
 class ReviewsController extends Controller
 {
@@ -31,6 +29,7 @@ class ReviewsController extends Controller
     public function store(Request $request, $model, $model_id)
     {
         //
+
     }
 
     /**
