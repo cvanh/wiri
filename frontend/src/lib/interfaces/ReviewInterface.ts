@@ -7,7 +7,6 @@ interface ReviewInterface {
   approved: boolean;
   created_at: string;
   updated_at: string;
-  deleted_at: string;
 }
 
 export default ReviewInterface;
