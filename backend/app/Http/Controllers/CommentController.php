@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Support\Facades\Gate;
 
 class CommentController extends Controller
 {
@@ -12,7 +13,6 @@ class CommentController extends Controller
 
     public function __construct()
     {
-        // FIXME this could allow models that shouldnt be queried
         $this->model = Relation::getMorphedModel(
             request()->route()->parameter("model")
         );
