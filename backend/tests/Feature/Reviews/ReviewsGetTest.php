@@ -8,10 +8,10 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 /**
- * CommentsGetTest
+ * ReviewsGetTest
  * @group Comments
  */
-class CommentsGetTest extends TestCase
+class ReviewsGetTest extends TestCase
 {
     use RefreshDatabase;
     /** @test */

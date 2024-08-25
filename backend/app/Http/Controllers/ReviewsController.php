@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\Gate;
 
-class CommentController extends Controller
+class ReviewsController extends Controller
 {
     protected $model;
 
