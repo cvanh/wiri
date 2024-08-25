@@ -1,6 +1,9 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 use App\Http\Controllers\AppController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProducerController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
@@ -23,4 +26,11 @@ Route::middleware('auth:sanctum')->name('api.')->group(static function () {
     Route::delete('/product/{id}', [ProductController::class, 'destroy'])->middleware('auth');
 
     Route::get('/app/search/', [AppController::class, 'search'])->middleware('auth');
+
+    Route::controller(CommentController::class)->group(function () {
+        Route::get('/{model}/{id}/comment', 'index')->whereIn('model', ['product', 'company']);
+        Route::post('/{model}/{model_id}/comment/create', 'store')->whereIn('model', ['product', 'company']);
+        Route::patch('/{model)/comment/{id)',  'update')->whereIn('model', ['product', 'company']);
+        Route::delete('/{model}/comment/{id}',  'destroy')->whereIn('model', ['product', 'company']);
+    })->middleware("auth");
 });
