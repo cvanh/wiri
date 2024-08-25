@@ -14,7 +14,7 @@ class Reviews extends Model
     use SoftDeletes;
     use HasUuids;
 
-    protected $primaryKey = 'review_id';
+    protected $primaryKey = 'id';
     public $incrementing = false;
 
     protected $table = 'reviews';

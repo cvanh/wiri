@@ -14,6 +14,6 @@ final class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-        Product::factory()->count(10)->hasProductMeta(10)->count(10)->create();
+        Product::factory()->count(10)->hasProductMeta(10)->hasReviews(10)->count(2)->create();
     }
 }

@@ -18,7 +18,6 @@ final class DatabaseSeeder extends Seeder
             ProducerSeeder::class,
             ProductSeeder::class,
             UserSeeder::class,
-            ReviewsSeeder::class
         ]);
     }
 }

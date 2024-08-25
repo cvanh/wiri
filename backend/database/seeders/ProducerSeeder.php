@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Database\Seeders;
 
@@ -12,6 +14,6 @@ final class ProducerSeeder extends Seeder
      */
     public function run(): void
     {
-        Company::factory()->count(10)->create();
+        Company::factory()->hasReviews(10)->count(10)->create();
     }
 }
