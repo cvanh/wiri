@@ -5,16 +5,19 @@ import ProductInterface from '../../lib/interfaces/ProductInterface';
 import ReviewInterface from '../../lib/interfaces/ReviewInterface';
 
 const ProductDetail = ({ route, navigation }) => {
-    const [Product, setProduct] = useState<ProductInterface, ReviewInterface>();
+    const [Product, setProduct] = useState<ProductInterface>();
+    const [Review, setReview] = useState<ReviewInterface>();
     const { id } = route.params
     useEffect(() => {
         async function getProduct() {
             const ProductRes = await axiosInstance.get(`/api/product/${id}`)
-            const ReviewsRes = await axiosInstance.get(`/api/product/${id}/comments`)
-            setProduct({ ...ProductRes.data, ...ReviewsRes.data })
+            const ReviewsRes = await axiosInstance.get(`/api/product/${id}/comment`)
+            setProduct(ProductRes.data)
+            setReview(ReviewsRes.data)
         }
         getProduct()
     }, []);
+    console.log(Review)
 
     return (
         <View>
@@ -33,9 +36,9 @@ const ProductDetail = ({ route, navigation }) => {
             )}
 
             <Text>reviewss:</Text>
-            {Product?.reviews && Product.reviews.map((review) => (
+            {Review && Review.map((review) => (
                 <>
-                    <Text>someone says:{review.content}</Text>
+                    <Text>someone says:{review.description}</Text>
                 </>
             ))}
 
