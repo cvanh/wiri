@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reviews;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class ReviewsController extends Controller
 {
@@ -53,7 +53,13 @@ class ReviewsController extends Controller
      */
     public function update(Request $request, $model, string $id)
     {
-        //
+        $review = Reviews::findOrFail($id);
+        // $review_update = $review_parent?->review();
+
+        Gate::authorize('update',Auth::user() ,$review);
+
+        $update = $review->update($request->all());
+
     }
 
     /**

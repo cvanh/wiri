@@ -30,7 +30,7 @@ Route::middleware('auth:sanctum')->name('api.')->group(static function () {
     Route::controller(ReviewsController::class)->group(function () {
         Route::get('/{model}/{id}/comment', 'index')->whereIn('model', ['product', 'company']);
         Route::post('/{model}/{model_id}/comment/create', 'store')->whereIn('model', ['product', 'company']);
-        Route::patch('/{model)/comment/{id)',  'update')->whereIn('model', ['product', 'company']);
+        Route::patch('/{model}/comment/{id}',  'update')->whereIn('model', ['product', 'company']);
         Route::delete('/{model}/comment/{id}',  'destroy')->whereIn('model', ['product', 'company']);
     })->middleware("auth");
 });

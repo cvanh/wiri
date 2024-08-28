@@ -18,7 +18,7 @@ class Reviews extends Model
     public $incrementing = false;
 
     protected $table = 'reviews';
-
+    // todo does author_id have to stay here?
     protected $fillable = ['content', 'rating', 'author_id'];
 
     public function review(): MorphTo
