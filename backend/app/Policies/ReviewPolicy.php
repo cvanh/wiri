@@ -34,9 +34,9 @@ class ReviewPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Reviews $reviews): bool
+    public function update(User $user, Reviews $review): bool
     {
-        return $reviews->author_id === $user->id;
+        return (bool) $review->author_id === $user->id;
     }
 
     /**

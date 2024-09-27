@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Reviews;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
@@ -56,9 +57,12 @@ class ReviewsController extends Controller
         $review = Reviews::findOrFail($id);
         // $review_update = $review_parent?->review();
 
-        Gate::authorize('update',Auth::user() ,$review);
+        Gate::authorize('update',$review);
 
-        $update = $review->update($request->all());
+        $updated = $review->updateOrFail($request->all());
+
+        return Response($updated);
+
 
     }
 

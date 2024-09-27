@@ -66,7 +66,7 @@ class ReviewEditTest extends TestCase
 
         $response = $this->actingAs($this->user)->patch("/api/company/comment/{$review->id}", $edited_review);
 
-        $response->assertUnauthorized();
+        $response->assertForbidden();
     }
 
 
