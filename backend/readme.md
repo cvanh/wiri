@@ -26,7 +26,7 @@ erDiagram
         str password
         str remember_token
     }
-    COMPANIES { 
+    COMPANY { 
         uuid id 
         enum type "store producer"
         decimal latitude
