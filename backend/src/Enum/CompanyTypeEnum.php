@@ -1,8 +1,7 @@
 <?php
 namespace App\Enum;
-
 enum CompanyTypeEnum: string
 {
-    case Producer = "Producer";
+    case Company = "Company";
     case Store = "Store";
 }
