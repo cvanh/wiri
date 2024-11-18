@@ -25,12 +25,14 @@ erDiagram
         str verified_at
         str password
         str remember_token
+        Company company
     }
     COMPANY { 
         uuid id 
         enum type "store producer"
         decimal longitude 
         decimal latitude
+        uuid user_id
         str name
         str about
     }
